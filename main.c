@@ -1,0 +1,389 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+enum error {
+        err_eof = 1
+};
+
+enum mode {
+        mode_single = 1,
+        mode_doubly,
+        mode_bintree
+};
+
+enum command {
+        cmd_nothing,
+        cmd_help,
+        cmd_quit,
+        cmd_chmod,
+        cmd_add,
+        cmd_dsp,
+        cmd_show
+};
+
+struct single_item {
+        int data;
+        struct single_item *next;
+};
+
+struct doubly_item {
+        int data;
+        struct doubly_item *prev, *next;
+};
+
+struct node {
+        int val;
+        struct node *left, *right; 
+};
+
+struct pointer {
+        struct single_item *s_first;
+        struct doubly_item *d_first, *d_last;
+        struct node *root;
+};
+
+/* Additional function for node [Future]
+struct node *search_node(struct node *r, int n)
+{
+        if (!r)
+                return NULL;
+        if (r->val == n)
+                return r;
+        if (n < r->val)
+                return search_node(n, r->left);
+        else
+                return search_node(n, r->right);
+}
+*/
+
+void add_single(struct single_item **first, int n)
+{
+        struct single_item *tmp;
+        tmp = malloc(sizeof(*tmp));
+        tmp->data = n;
+        tmp->next = *first;
+        *first = tmp;
+}
+
+void add_doubly(struct doubly_item **first, struct doubly_item **last, int n)
+{
+        struct doubly_item *tmp;
+        tmp = malloc(sizeof(*tmp));
+        tmp->data = n;
+        tmp->prev = *last;
+        tmp->next = NULL;
+        if (*last)
+                (*last)->next = tmp;
+        else
+                *first = tmp;
+        *last = tmp;
+}
+
+void add_node(struct node **r, int n)
+{
+        if (!*r) {
+                *r = malloc(sizeof(*r));
+                (*r)->val   = n;
+                (*r)->left  = NULL;
+                (*r)->right = NULL;
+                return;
+        }
+        if ((*r)->val == n)
+                return;
+        if (n < (*r)->val)
+                add_node(&(*r)->left, n);
+        else
+                add_node(&(*r)->right, n);
+}
+
+void dispose_single(struct single_item *first)
+{
+        struct single_item *tmp;
+        while (first) {
+                tmp = first;
+                first = first->next;
+                free(tmp);
+        }
+}
+
+void dispose_doubly(struct doubly_item *first)
+{
+        struct doubly_item *tmp;
+        while (first) {
+                tmp = first;
+                first = first->next;
+                free(tmp);
+        }
+}
+
+void dispose_node(struct node *r)
+{
+        if (!r)
+                return;
+        dispose_node(r->left);
+        dispose_node(r->right);
+        free(r);
+}
+
+void show_single(struct single_item *first)
+{
+        for (; first; first = first->next)
+                printf("%d\n", first->data);
+}
+
+void show_doubly(struct doubly_item *first)
+{
+        for (; first; first = first->next)
+                printf("%d\n", first->data);
+}
+
+void show_node(struct node *r)
+{
+        if (!r)
+                return;
+        show_node(r->left);
+        printf("%d\n", r->val);
+        show_node(r->right);
+}
+
+void dispose_all(struct pointer p)
+{
+        dispose_single(p.s_first);
+        dispose_doubly(p.d_first);
+        dispose_node(p.root);
+}
+
+void help_short()
+{
+        printf("Invalid command, try 'h' for help\n");
+}
+
+void help_full()
+{
+        printf("\
+Here 3 modes:\n\
+        [S/s]ingle-linked list\n\
+        [D/d]oubly-linked list\n\
+        [B/b]inary tree\n\
+You can manage dynamic data structures by these commands:\n\
+        [A/a] - add item\n\
+        [D/d] - dispose all\n\
+        [S/s] - show all\n\
+Also these commands can be useful too:\n\
+        [M/m] - change mode\n\
+        [H/h] - this help\n\
+        [Q/q] - quit\n");
+}
+
+void change_mode(enum mode *m, int val)
+{
+        switch (val) {
+                case 'S':
+                case 's':
+                        *m = mode_single;
+                        break;
+                case 'D':
+                case 'd':
+                        *m = mode_doubly;
+                        break;
+                case 'B':
+                case 'b':
+                        *m = mode_bintree;
+                        break;
+        }
+}
+
+enum mode parse_mode()
+{
+        enum mode m = mode_single;
+        int c;
+        printf("Enter mode [S/d/b]: ");
+        while ((c = getchar()) != '\n' && c != EOF) {
+                switch (c) {
+                        case 'S':
+                        case 's':
+                                m = mode_single;
+                                break;
+                        case 'D':
+                        case 'd':
+                                m = mode_doubly;
+                                break;
+                        case 'B':
+                        case 'b':
+                                m = mode_bintree;
+                                break;
+                }
+        }
+        if (c == EOF) {
+                fprintf(stderr, "error: used EOF instead of RETURN\n");
+                return 0;
+        }
+        return m;
+}
+
+int parse_cmd(enum command *cmd, int *val)
+{
+        int c;
+        int negative = 0;
+        *cmd = cmd_nothing;
+        *val = 0;
+        printf("Enter command: ");
+        while ((c = getchar()) != '\n' && c != EOF) {
+                switch (c) {
+                        case 'H':
+                        case 'h':
+                                *cmd = cmd_help;
+                                break;
+                        case 'Q':
+                        case 'q':
+                                *cmd = cmd_quit;
+                                break;
+                        case 'M':
+                        case 'm':
+                                *cmd = cmd_chmod;
+                                break;
+                        case 'A':
+                        case 'a':
+                                *cmd = cmd_add;
+                                break;
+                        case 'D':
+                        case 'd':
+                                *cmd = cmd_dsp;
+                                break;
+                        case 'S':
+                        case 's':
+                                *cmd = cmd_show;
+                                break;
+                }
+        }
+        if (c == EOF) {
+                fprintf(stderr, "error: used EOF instead of RETURN\n");
+                return 0;
+        }
+        switch (*cmd) {
+                case cmd_chmod:
+                case cmd_add:
+                        printf("Enter %s: ",
+                               *cmd == cmd_chmod ? "mode" : "value");
+                        while ((c = getchar()) != '\n' && c != EOF) {
+                                switch (c) {
+                                        case '-':
+                                                negative = 1;
+                                                break;
+                                        case '0':
+                                        case '1':
+                                        case '2':
+                                        case '3':
+                                        case '4':
+                                        case '5':
+                                        case '6':
+                                        case '7':
+                                        case '8':
+                                        case '9':
+                                                *val = *val * 10 + c - '0';
+                                                break;
+                                        case 'S':
+                                        case 's':
+                                        case 'D':
+                                        case 'd':
+                                        case 'B':
+                                        case 'b':
+                                                *val = c;
+                                }
+                        }
+                        if (negative)
+                                *val *= -1;
+                        break;
+                default:
+                        break;
+        }
+        if (c == EOF) {
+                fprintf(stderr, "error: used EOF instead of RETURN\n");
+                return 0;
+        }
+        return 1;
+}
+
+int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
+{
+        switch (cmd) {
+                case cmd_nothing:
+                        help_short();
+                        break;
+                case cmd_help:
+                        help_full();
+                        break;
+                case cmd_quit:
+                        return 0;
+                case cmd_chmod:
+                        change_mode(m, val);
+                        break;
+                case cmd_add:
+                        switch (*m) {
+                                case mode_single:
+                                        add_single(&(*p).s_first, val);
+                                        break;
+                                case mode_doubly:
+                                        add_doubly(&(*p).d_first,
+                                                   &(*p).d_last,
+                                                   val);
+                                        break;
+                                case mode_bintree:
+                                        add_node(&(*p).root, val);
+                                        break;
+                        }
+                        break;
+                case cmd_dsp:
+                        switch (*m) {
+                                case mode_single:
+                                        dispose_single((*p).s_first);
+                                        (*p).s_first = NULL;
+                                        break;
+                                case mode_doubly:
+                                        dispose_doubly((*p).d_first);
+                                        (*p).d_first = (*p).d_last = NULL;
+                                        break;
+                                case mode_bintree:
+                                        dispose_node((*p).root);
+                                        (*p).root = NULL;
+                                        break;
+                        }
+                        break;
+                case cmd_show:
+                        switch (*m) {
+                                case mode_single:
+                                        show_single((*p).s_first);
+                                        break;
+                                case mode_doubly:
+                                        show_doubly((*p).d_first);
+                                        break;
+                                case mode_bintree:
+                                        show_node((*p).root);;
+                                        break;
+                        }
+                        break;
+        }
+        return 1;
+}
+
+int main()
+{
+        struct pointer p = { NULL, NULL, NULL, NULL };
+        enum mode m;
+        enum command cmd;
+        int val;
+        int res;
+        m = parse_mode();
+        if (!m)
+                return err_eof;
+        for (;;) {
+                res = parse_cmd(&cmd, &val);
+                if (!res)
+                        return err_eof;
+                res = handle_cmd(cmd, val, &p, &m);
+                if (!res)
+                        break;
+        }
+        dispose_all(p);
+        return 0;
+}
