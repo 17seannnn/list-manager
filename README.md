@@ -8,7 +8,9 @@ Three modes:
 - Binary tree
 
 For now you can add items to your structure, dispose them and show them.
-Later, i want to add some additional features for doubly-linked list and binary tree.
+
+Later, i want to add some additional features for doubly-linked list and
+binary tree.
 
 ## Install
 ```bash
