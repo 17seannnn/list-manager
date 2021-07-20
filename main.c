@@ -1,6 +1,5 @@
 /*
  * TODO:
- * Search doubly-linked list
  * handle_cmd(): use -> instead of (*).
  * Manage current pointer for single&doubly-linked lists
  * Delete current pointer for single&doubly-linked lists
@@ -149,6 +148,17 @@ void show_node(struct node *r)
 }
 
 void search_single(struct single_item *first, int n)
+{
+        for (; first; first = first->next) {
+                if (n == first->data) {
+                        printf("Found.\n");
+                        return;
+                }
+        }
+        printf("Not found.\n");
+}
+
+void search_doubly(struct doubly_item *first, int n)
 {
         for (; first; first = first->next) {
                 if (n == first->data) {
@@ -394,6 +404,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                         search_single((*p).s_first, val);
                                         break;
                                 case mode_doubly:
+                                        search_doubly((*p).d_first, val)
                                         break;
                                 case mode_bintree:
                                         search_node((*p).root, val);
