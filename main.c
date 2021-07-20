@@ -1,6 +1,5 @@
 /*
  * TODO:
- * handle_cmd(): use -> instead of (*).
  * Manage current pointer for single&doubly-linked lists
  * Delete current pointer for single&doubly-linked lists
  * Delete node: user enter the value and we delete node with this value
@@ -357,57 +356,57 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case cmd_add:
                         switch (*m) {
                                 case mode_single:
-                                        add_single(&(*p).s_first, val);
+                                        add_single(&p->s_first, val);
                                         break;
                                 case mode_doubly:
-                                        add_doubly(&(*p).d_first,
-                                                   &(*p).d_last,
+                                        add_doubly(&p->d_first,
+                                                   &p->d_last,
                                                    val);
                                         break;
                                 case mode_bintree:
-                                        add_node(&(*p).root, val);
+                                        add_node(&p->root, val);
                                         break;
                         }
                         break;
                 case cmd_dsp:
                         switch (*m) {
                                 case mode_single:
-                                        dispose_single((*p).s_first);
-                                        (*p).s_first = NULL;
+                                        dispose_single(p->s_first);
+                                        p->s_first = NULL;
                                         break;
                                 case mode_doubly:
-                                        dispose_doubly((*p).d_first);
-                                        (*p).d_first = (*p).d_last = NULL;
+                                        dispose_doubly(p->d_first);
+                                        p->d_first = p->d_last = NULL;
                                         break;
                                 case mode_bintree:
-                                        dispose_node((*p).root);
-                                        (*p).root = NULL;
+                                        dispose_node(p->root);
+                                        p->root = NULL;
                                         break;
                         }
                         break;
                 case cmd_show:
                         switch (*m) {
                                 case mode_single:
-                                        show_single((*p).s_first);
+                                        show_single(p->s_first);
                                         break;
                                 case mode_doubly:
-                                        show_doubly((*p).d_first);
+                                        show_doubly(p->d_first);
                                         break;
                                 case mode_bintree:
-                                        show_node((*p).root);
+                                        show_node(p->root);
                                         break;
                         }
                         break;
                 case cmd_search:
                         switch (*m) {
                                 case mode_single:
-                                        search_single((*p).s_first, val);
+                                        search_single(p->s_first, val);
                                         break;
                                 case mode_doubly:
-                                        search_doubly((*p).d_first, val)
+                                        search_doubly(p->d_first, val);
                                         break;
                                 case mode_bintree:
-                                        search_node((*p).root, val);
+                                        search_node(p->root, val);
                                         break;
                         }
                         break;
