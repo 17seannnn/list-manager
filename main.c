@@ -1,3 +1,12 @@
+/*
+ * TODO:
+ * Search node
+ * Search single&doubly-linked list
+ * handle_cmd(): use -> instead of (*).
+ * Manage current pointer for single&doubly-linked lists
+ * Delete current pointer for single&doubly-linked lists
+ * Delete node: user enter the value and we delete node with this value
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,7 +27,8 @@ enum command {
         cmd_chmod,
         cmd_add,
         cmd_dsp,
-        cmd_show
+        cmd_show,
+        cmd_search
 };
 
 struct single_item {
@@ -41,20 +51,6 @@ struct pointer {
         struct doubly_item *d_first, *d_last;
         struct node *root;
 };
-
-/* Additional function for node [Future]
-struct node *search_node(struct node *r, int n)
-{
-        if (!r)
-                return NULL;
-        if (r->val == n)
-                return r;
-        if (n < r->val)
-                return search_node(n, r->left);
-        else
-                return search_node(n, r->right);
-}
-*/
 
 void add_single(struct single_item **first, int n)
 {
@@ -125,6 +121,13 @@ void dispose_node(struct node *r)
         free(r);
 }
 
+void dispose_all(struct pointer p)
+{
+        dispose_single(p.s_first);
+        dispose_doubly(p.d_first);
+        dispose_node(p.root);
+}
+
 void show_single(struct single_item *first)
 {
         for (; first; first = first->next)
@@ -146,11 +149,20 @@ void show_node(struct node *r)
         show_node(r->right);
 }
 
-void dispose_all(struct pointer p)
+void search_node(struct node *r, int n)
 {
-        dispose_single(p.s_first);
-        dispose_doubly(p.d_first);
-        dispose_node(p.root);
+        if (!r) {
+                printf("Not found.\n");
+                return;
+        }
+        if (r->val == n) {
+                printf("Found.\n");
+                return;
+        }
+        if (n < r->val)
+                search_node(r->left, n);
+        else
+                search_node(r->right, n);
 }
 
 void help_short()
@@ -168,7 +180,8 @@ Here 3 modes:\n\
 You can manage dynamic data structures by these commands:\n\
         [A/a] - add item\n\
         [D/d] - dispose all\n\
-        [S/s] - show all\n\
+        [S]   - show all\n\
+        [s]   - search item\n\
 Also these commands can be useful too:\n\
         [M/m] - change mode\n\
         [H/h] - this help\n\
@@ -251,8 +264,10 @@ int parse_cmd(enum command *cmd, int *val)
                                 *cmd = cmd_dsp;
                                 break;
                         case 'S':
-                        case 's':
                                 *cmd = cmd_show;
+                                break;
+                        case 's':
+                                *cmd = cmd_search;
                                 break;
                 }
         }
@@ -263,6 +278,7 @@ int parse_cmd(enum command *cmd, int *val)
         switch (*cmd) {
                 case cmd_chmod:
                 case cmd_add:
+                case cmd_search:
                         printf("Enter %s: ",
                                *cmd == cmd_chmod ? "mode" : "value");
                         while ((c = getchar()) != '\n' && c != EOF) {
@@ -358,7 +374,18 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                         show_doubly((*p).d_first);
                                         break;
                                 case mode_bintree:
-                                        show_node((*p).root);;
+                                        show_node((*p).root);
+                                        break;
+                        }
+                        break;
+                case cmd_search:
+                        switch (*m) {
+                                case mode_single:
+                                        break;
+                                case mode_doubly:
+                                        break;
+                                case mode_bintree:
+                                        search_node((*p).root, val);
                                         break;
                         }
                         break;
