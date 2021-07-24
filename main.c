@@ -1,13 +1,6 @@
 /*
  * TODO:
- * Add in current prev or next pointer for single&doubly-linked lists
- * Add, add_cur, dispose, dispose_cur,
- *      search current also change current pointer
- *
- *
- *
- *
- *
+ * Search current also change current pointer *
  *
  * --------------------------------------------------------------------
  * Refactoring:
@@ -20,11 +13,14 @@
  *
  *
  * Later:
+ * Add in current prev or next pointer for single&doubly-linked lists
+ * Add_cur, search current also change current pointer
  * Delete change_mode func and use parse_mode for when cmd_chmod
  * Remove value parsing from parse_cmd, add parse_value get
  * Improve README
  * Delete node: user enter the value and we delete node with this value
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -197,6 +193,25 @@ void dispose_single(struct single_item *first)
         }
 }
 
+void dispose_doubly(struct doubly_item *first)
+{
+        struct doubly_item *tmp;
+        while (first) {
+                tmp = first;
+                first = first->next;
+                free(tmp);
+        }
+}
+
+void dispose_node(struct node *r)
+{
+        if (!r)
+                return;
+        dispose_node(r->left);
+        dispose_node(r->right);
+        free(r);
+}
+
 void dispose_single_cur(struct single_item **first, struct single_item **cur)
 {
         struct single_item *tmp = *cur;
@@ -210,16 +225,6 @@ void dispose_single_cur(struct single_item **first, struct single_item **cur)
                 first = &(*first)->next;
         *first = (*first)->next;
         free(tmp);
-}
-
-void dispose_doubly(struct doubly_item *first)
-{
-        struct doubly_item *tmp;
-        while (first) {
-                tmp = first;
-                first = first->next;
-                free(tmp);
-        }
 }
 
 void dispose_doubly_cur(struct doubly_item **first,
@@ -240,15 +245,6 @@ void dispose_doubly_cur(struct doubly_item **first,
         else
                 *last = tmp->prev;
         free(tmp);
-}
-
-void dispose_node(struct node *r)
-{
-        if (!r)
-                return;
-        dispose_node(r->left);
-        dispose_node(r->right);
-        free(r);
 }
 
 void dispose_all(struct pointer p)
