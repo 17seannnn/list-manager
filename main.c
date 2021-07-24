@@ -1,8 +1,7 @@
 /*
  * TODO:
- * Manage current pointer for doubly-linked lists: *
+ * Delete current pointer for doubly-linked lists *
  * Add in current prev or next pointer for single&doubly-linked lists
- * Delete current pointer for single&doubly-linked lists
  * Add, add_cur, dispose, dispose_cur,
  *      search current also change current pointer
  *
@@ -48,6 +47,7 @@ enum command {
         cmd_chcur,
         cmd_add,
         cmd_dsp,
+        cmd_dsp_cur,
         cmd_show,
         cmd_search
 };
@@ -73,6 +73,31 @@ struct pointer {
         struct node *root;
 };
 
+void help_short()
+{
+        printf("Invalid command, try 'h' for help\n");
+}
+
+void help_full()
+{
+        printf("\
+Here 3 modes:\n\
+        [S/s]ingle-linked list\n\
+        [D/d]oubly-linked list\n\
+        [B/b]inary tree\n\
+You can manage dynamic data structures by these commands:\n\
+        [M/m] - change mode\n\
+        [C/c] - change current pointer\n\
+        [A/a] - add item\n\
+        [D]   - dispose all\n\
+        [d]   - dispose current\n\
+        [S]   - show all\n\
+        [s]   - search item\n\
+Also these commands can be useful too:\n\
+        [H/h] - this help\n\
+        [Q/q] - quit\n");
+}
+
 void change_cur_single(struct single_item *first,
                        struct single_item **cur,
                        int n)
@@ -87,6 +112,7 @@ void change_cur_single(struct single_item *first,
                         tmp = first;
                         k = (*cur)->data;
                         if (tmp->data != k)
+                                 /* TODO search by *cur */
                                 while(tmp->next->data != k)
                                         tmp = tmp->next;
                         *cur = tmp;
@@ -170,6 +196,21 @@ void dispose_single(struct single_item *first)
                 first = first->next;
                 free(tmp);
         }
+}
+
+void dispose_single_cur(struct single_item **first, struct single_item **cur)
+{
+        struct single_item *tmp = *cur;
+        if (!cur)
+                return;
+        if ((*cur)->next)
+                *cur = (*cur)->next;
+        else
+                change_cur_single(*first, cur, 'p');
+        while (*first != tmp)
+                first = &(*first)->next;
+        *first = (*first)->next;
+        free(tmp);
 }
 
 void dispose_doubly(struct doubly_item *first)
@@ -257,30 +298,6 @@ void search_node(struct node *r, int n)
                 search_node(r->right, n);
 }
 
-void help_short()
-{
-        printf("Invalid command, try 'h' for help\n");
-}
-
-void help_full()
-{
-        printf("\
-Here 3 modes:\n\
-        [S/s]ingle-linked list\n\
-        [D/d]oubly-linked list\n\
-        [B/b]inary tree\n\
-You can manage dynamic data structures by these commands:\n\
-        [M/m] - change mode\n\
-        [C/c] - change current pointer\n\
-        [A/a] - add item\n\
-        [D/d] - dispose all\n\
-        [S]   - show all\n\
-        [s]   - search item\n\
-Also these commands can be useful too:\n\
-        [H/h] - this help\n\
-        [Q/q] - quit\n");
-}
-
 void change_mode(enum mode *m, int val)
 {
         switch (val) {
@@ -357,8 +374,10 @@ int parse_cmd(enum command *cmd, int *val)
                                 *cmd = cmd_add;
                                 break;
                         case 'D':
-                        case 'd':
                                 *cmd = cmd_dsp;
+                                break;
+                        case 'd':
+                                *cmd = cmd_dsp_cur;
                                 break;
                         case 'S':
                                 *cmd = cmd_show;
@@ -480,6 +499,18 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                 case mode_bintree:
                                         dispose_node(p->root);
                                         p->root = NULL;
+                                        break;
+                        }
+                        break;
+                case cmd_dsp_cur:
+                        switch (*m) {
+                                case mode_single:
+                                        dispose_single_cur(&p->s_first,
+                                                           &p->s_cur);
+                                        break;
+                                case mode_doubly:
+                                        break;
+                                default:
                                         break;
                         }
                         break;
