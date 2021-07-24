@@ -1,7 +1,30 @@
 /*
  * TODO:
- * Manage current pointer for single&doubly-linked lists
+ * Manage current pointer for single&doubly-linked lists prev, next: *
+ * Add in current prev or next pointer for single&doubly-linked lists
  * Delete current pointer for single&doubly-linked lists
+ * Add, add_cur, dispose, dispose_cur,
+ *      search current also change current pointer
+ *
+ *
+ *
+ *
+ *
+ *
+ * --------------------------------------------------------------------
+ * Refactoring:
+ * Use anonym enum for constants
+ * Remove code repetitions by using macroses for list functions
+ * Change code style: switch, instead of "Enter command: " use "% ",
+ *      simplify funcs` name
+ *
+ *
+ *
+ *
+ * Later:
+ * Delete change_mode func and use parse_mode for when cmd_chmod
+ * Remove value parsing from parse_cmd, add parse_value get
+ * Improve README
  * Delete node: user enter the value and we delete node with this value
 */
 #include <stdio.h>
@@ -22,6 +45,7 @@ enum command {
         cmd_help,
         cmd_quit,
         cmd_chmod,
+        cmd_chcur,
         cmd_add,
         cmd_dsp,
         cmd_show,
@@ -44,18 +68,50 @@ struct node {
 };
 
 struct pointer {
-        struct single_item *s_first;
-        struct doubly_item *d_first, *d_last;
+        struct single_item *s_first, *s_cur;
+        struct doubly_item *d_first, *d_last, *d_cur;
         struct node *root;
 };
 
-void add_single(struct single_item **first, int n)
+/* TODO */
+void change_cur_single(struct single_item *first,
+                       struct single_item **cur,
+                       int n)
+{
+        struct single_item *tmp;
+        int k;
+        if (!*cur)
+                return;
+        switch (n) {
+                case 'P':
+                case 'p':
+                        tmp = first;
+                        k = (*cur)->data;
+                        if (tmp->data != k)
+                                while(tmp->next->data != k)
+                                        tmp = tmp->next;
+                        *cur = tmp;
+                        break;
+                case 'N':
+                case 'n':
+                        if ((*cur)->next)
+                                *cur = (*cur)->next;
+                        break;
+        }
+}
+
+void change_cur_doubly(struct doubly_item *cur, int n)
+{
+}
+
+void add_single(struct single_item **first, struct single_item **cur, int n)
 {
         struct single_item *tmp;
         tmp = malloc(sizeof(*tmp));
         tmp->data = n;
         tmp->next = *first;
         *first = tmp;
+        *cur = tmp;
 }
 
 void add_doubly(struct doubly_item **first, struct doubly_item **last, int n)
@@ -125,10 +181,10 @@ void dispose_all(struct pointer p)
         dispose_node(p.root);
 }
 
-void show_single(struct single_item *first)
+void show_single(struct single_item *first, struct single_item *cur)
 {
         for (; first; first = first->next)
-                printf("%d\n", first->data);
+                printf("%d %c\n", first->data, first == cur ? '*' : 0);
 }
 
 void show_doubly(struct doubly_item *first)
@@ -197,12 +253,13 @@ Here 3 modes:\n\
         [D/d]oubly-linked list\n\
         [B/b]inary tree\n\
 You can manage dynamic data structures by these commands:\n\
+        [M/m] - change mode\n\
+        [C/c] - change current pointer\n\
         [A/a] - add item\n\
         [D/d] - dispose all\n\
         [S]   - show all\n\
         [s]   - search item\n\
 Also these commands can be useful too:\n\
-        [M/m] - change mode\n\
         [H/h] - this help\n\
         [Q/q] - quit\n");
 }
@@ -274,6 +331,10 @@ int parse_cmd(enum command *cmd, int *val)
                         case 'm':
                                 *cmd = cmd_chmod;
                                 break;
+                        case 'C':
+                        case 'c':
+                                *cmd = cmd_chcur;
+                                break;
                         case 'A':
                         case 'a':
                                 *cmd = cmd_add;
@@ -296,6 +357,7 @@ int parse_cmd(enum command *cmd, int *val)
         }
         switch (*cmd) {
                 case cmd_chmod:
+                case cmd_chcur:
                 case cmd_add:
                 case cmd_search:
                         printf("Enter %s: ",
@@ -323,7 +385,12 @@ int parse_cmd(enum command *cmd, int *val)
                                         case 'd':
                                         case 'B':
                                         case 'b':
+                                        case 'P':
+                                        case 'p':
+                                        case 'N':
+                                        case 'n':
                                                 *val = c;
+                                                break;
                                 }
                         }
                         if (negative)
@@ -353,10 +420,24 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case cmd_chmod:
                         change_mode(m, val);
                         break;
+                case cmd_chcur:
+                        switch (*m) {
+                                case mode_single:
+                                        change_cur_single(p->s_first,
+                                                          &p->s_cur,
+                                                          val);
+                                        break;
+                                case mode_doubly:
+                                        change_cur_doubly(p->d_cur, val);
+                                        break;
+                                default:
+                                        break;
+                        }
+                        break;
                 case cmd_add:
                         switch (*m) {
                                 case mode_single:
-                                        add_single(&p->s_first, val);
+                                        add_single(&p->s_first, &p->s_cur, val);
                                         break;
                                 case mode_doubly:
                                         add_doubly(&p->d_first,
@@ -387,7 +468,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case cmd_show:
                         switch (*m) {
                                 case mode_single:
-                                        show_single(p->s_first);
+                                        show_single(p->s_first, p->s_cur);
                                         break;
                                 case mode_doubly:
                                         show_doubly(p->d_first);
@@ -416,7 +497,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
 
 int main()
 {
-        struct pointer p = { NULL, NULL, NULL, NULL };
+        struct pointer p = { NULL, NULL, NULL, NULL, NULL, NULL };
         enum mode m;
         enum command cmd;
         int val;
