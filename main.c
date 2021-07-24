@@ -1,6 +1,5 @@
 /*
  * TODO:
- * Delete current pointer for doubly-linked lists *
  * Add in current prev or next pointer for single&doubly-linked lists
  * Add, add_cur, dispose, dispose_cur,
  *      search current also change current pointer
@@ -25,7 +24,7 @@
  * Remove value parsing from parse_cmd, add parse_value get
  * Improve README
  * Delete node: user enter the value and we delete node with this value
-*/
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -204,7 +203,7 @@ void dispose_single_cur(struct single_item **first, struct single_item **cur)
         if (!cur)
                 return;
         if ((*cur)->next)
-                *cur = (*cur)->next;
+                change_cur_single(*first, cur, 'n');
         else
                 change_cur_single(*first, cur, 'p');
         while (*first != tmp)
@@ -221,6 +220,26 @@ void dispose_doubly(struct doubly_item *first)
                 first = first->next;
                 free(tmp);
         }
+}
+
+void dispose_doubly_cur(struct doubly_item **first,
+                        struct doubly_item **last,
+                        struct doubly_item **cur)
+{
+        struct doubly_item *tmp = *cur;
+        if ((*cur)->next)
+                change_cur_doubly(cur, 'n');
+        else
+                change_cur_doubly(cur, 'p');
+        if (tmp->prev)
+                tmp->prev->next = tmp->next;
+        else
+                *first = tmp->next;
+        if (tmp->next)
+                tmp->next->prev = tmp->prev;
+        else
+                *last = tmp->prev;
+        free(tmp);
 }
 
 void dispose_node(struct node *r)
@@ -509,6 +528,9 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                                            &p->s_cur);
                                         break;
                                 case mode_doubly:
+                                        dispose_doubly_cur(&p->d_first,
+                                                           &p->d_last,
+                                                           &p->d_cur);
                                         break;
                                 default:
                                         break;
