@@ -1,6 +1,6 @@
 /*
  * TODO:
- * Manage current pointer for single&doubly-linked lists prev, next: *
+ * Manage current pointer for doubly-linked lists: *
  * Add in current prev or next pointer for single&doubly-linked lists
  * Delete current pointer for single&doubly-linked lists
  * Add, add_cur, dispose, dispose_cur,
@@ -16,7 +16,7 @@
  * Use anonym enum for constants
  * Remove code repetitions by using macroses for list functions
  * Change code style: switch, instead of "Enter command: " use "% ",
- *      simplify funcs` name
+ *      simplify funcs` name, change args name like cur -> pcur
  *
  *
  *
@@ -73,7 +73,6 @@ struct pointer {
         struct node *root;
 };
 
-/* TODO */
 void change_cur_single(struct single_item *first,
                        struct single_item **cur,
                        int n)
@@ -100,8 +99,22 @@ void change_cur_single(struct single_item *first,
         }
 }
 
-void change_cur_doubly(struct doubly_item *cur, int n)
+void change_cur_doubly(struct doubly_item **cur, int n)
 {
+        if (!*cur)
+                return;
+        switch (n) {
+                case 'P':
+                case 'p':
+                        if ((*cur)->prev)
+                                *cur = (*cur)->prev;
+                        break;
+                case 'N':
+                case 'n':
+                        if ((*cur)->next)
+                                *cur = (*cur)->next;
+                        break;
+        }
 }
 
 void add_single(struct single_item **first, struct single_item **cur, int n)
@@ -114,7 +127,10 @@ void add_single(struct single_item **first, struct single_item **cur, int n)
         *cur = tmp;
 }
 
-void add_doubly(struct doubly_item **first, struct doubly_item **last, int n)
+void add_doubly(struct doubly_item **first,
+                struct doubly_item **last,
+                struct doubly_item **cur,
+                int n)
 {
         struct doubly_item *tmp;
         tmp = malloc(sizeof(*tmp));
@@ -126,6 +142,7 @@ void add_doubly(struct doubly_item **first, struct doubly_item **last, int n)
         else
                 *first = tmp;
         *last = tmp;
+        *cur = tmp;
 }
 
 void add_node(struct node **r, int n)
@@ -187,10 +204,10 @@ void show_single(struct single_item *first, struct single_item *cur)
                 printf("%d %c\n", first->data, first == cur ? '*' : 0);
 }
 
-void show_doubly(struct doubly_item *first)
+void show_doubly(struct doubly_item *first, struct doubly_item *cur)
 {
         for (; first; first = first->next)
-                printf("%d\n", first->data);
+                printf("%d %c\n", first->data, first == cur ? '*' : 0);
 }
 
 void show_node(struct node *r)
@@ -428,7 +445,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                                           val);
                                         break;
                                 case mode_doubly:
-                                        change_cur_doubly(p->d_cur, val);
+                                        change_cur_doubly(&p->d_cur, val);
                                         break;
                                 default:
                                         break;
@@ -442,6 +459,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                 case mode_doubly:
                                         add_doubly(&p->d_first,
                                                    &p->d_last,
+                                                   &p->d_cur,
                                                    val);
                                         break;
                                 case mode_bintree:
@@ -471,7 +489,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                                         show_single(p->s_first, p->s_cur);
                                         break;
                                 case mode_doubly:
-                                        show_doubly(p->d_first);
+                                        show_doubly(p->d_first, p->d_cur);
                                         break;
                                 case mode_bintree:
                                         show_node(p->root);
