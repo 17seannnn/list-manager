@@ -3,13 +3,15 @@
  * Refactoring:
  * Use anonym enum for constants
  * Remove code repetitions by using macroses for list functions
- * Change code style: switch, instead of "Enter command: " use "% ",
- *      simplify funcs` name, change args name like cur -> pcur
+ * Change code style: switch, simplify funcs` name,
+ *                                      change args name like cur -> pcur
  *
  *
  *
  * --------------------------------------------------------------------
  * Later:
+ * Add version cmd
+ * Add options
  * Add in current prev or next pointer for single&doubly-linked lists
  * Add_cur, search current also change current pointer
  * Delete change_mode func and use parse_mode for when cmd_chmod
@@ -364,7 +366,7 @@ int parse_cmd(enum command *cmd, int *val)
         int negative = 0;
         *cmd = cmd_nothing;
         *val = 0;
-        printf("Enter command: ");
+        printf("%% ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
                         case 'H':
@@ -410,8 +412,8 @@ int parse_cmd(enum command *cmd, int *val)
                 case cmd_chcur:
                 case cmd_add:
                 case cmd_search:
-                        printf("Enter %s: ",
-                               *cmd == cmd_chmod ? "mode" : "value");
+                        printf("%s ",
+                               *cmd == cmd_chmod ? "mode [S/d/b]" : "val:");
                         while ((c = getchar()) != '\n' && c != EOF) {
                                 switch (c) {
                                         case '-':
