@@ -1,7 +1,6 @@
 /*
  * --------------------------------------------------------------------
  * Refactoring:
- * Use anonym enum for constants
  * Remove code repetitions by using macroses for list functions
  * Change code style: switch, simplify funcs` name,
  *                                      change args name like cur -> pcur
@@ -23,9 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-enum error {
-        err_eof = 1
-};
+#define ERR_EOF 1
 
 enum mode {
         mode_single = 1,
@@ -576,11 +573,11 @@ int main()
         int res;
         m = parse_mode();
         if (!m)
-                return err_eof;
+                return ERR_EOF;
         for (;;) {
                 res = parse_cmd(&cmd, &val);
                 if (!res)
-                        return err_eof;
+                        return ERR_EOF;
                 res = handle_cmd(cmd, val, &p, &m);
                 if (!res)
                         break;
