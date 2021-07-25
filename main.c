@@ -1,7 +1,4 @@
 /*
- * TODO:
- * Search current also change current pointer *
- *
  * --------------------------------------------------------------------
  * Refactoring:
  * Use anonym enum for constants
@@ -11,7 +8,7 @@
  *
  *
  *
- *
+ * --------------------------------------------------------------------
  * Later:
  * Add in current prev or next pointer for single&doubly-linked lists
  * Add_cur, search current also change current pointer
@@ -275,22 +272,24 @@ void show_node(struct node *r)
         show_node(r->right);
 }
 
-void search_single(struct single_item *first, int n)
+void search_single(struct single_item *first, struct single_item **cur, int n)
 {
         for (; first; first = first->next) {
                 if (n == first->data) {
                         printf("Found.\n");
+                        *cur = first;
                         return;
                 }
         }
         printf("Not found.\n");
 }
 
-void search_doubly(struct doubly_item *first, int n)
+void search_doubly(struct doubly_item *first, struct doubly_item **cur, int n)
 {
         for (; first; first = first->next) {
                 if (n == first->data) {
                         printf("Found.\n");
+                        *cur = first;
                         return;
                 }
         }
@@ -548,10 +547,14 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case cmd_search:
                         switch (*m) {
                                 case mode_single:
-                                        search_single(p->s_first, val);
+                                        search_single(p->s_first,
+                                                      &p->s_cur,
+                                                      val);
                                         break;
                                 case mode_doubly:
-                                        search_doubly(p->d_first, val);
+                                        search_doubly(p->d_first,
+                                                      &p->d_cur,
+                                                      val);
                                         break;
                                 case mode_bintree:
                                         search_node(p->root, val);
