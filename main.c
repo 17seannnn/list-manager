@@ -1,13 +1,22 @@
 /*
  * --------------------------------------------------------------------
  * Refactoring:
- * Change code style: simplify funcs` name, change args name like cur -> pcur
+ * Change code style: simplify funcs` name *, change args name like cur -> pcur
  * Remove code repetitions by using macroses for list functions
+ *
  *
  *
  *
  * --------------------------------------------------------------------
  * Later:
+ * Change chcur func:
+ *      1) If cur is NULL then in case n is 'N'/'n' we set cur ptr on first ptr,
+ *              in case n is 'P'/'p' we set cur ptr on last ptr.
+ *      2) If next/prev ptr is NULL, then set cur on NULL.
+ *      3) Change prev and next by *cur, next change *cur and next free(tmp)
+ *
+ *
+ *
  * Add version cmd
  * Add options
  * Add show cur cmd, change search on '?'
@@ -89,32 +98,33 @@ Also these commands can be useful too:\n\
         [Q/q] - quit\n");
 }
 
-void change_cur_single(struct single_item *first,
-                       struct single_item **cur,
-                       int n)
+int chcur_single(struct single_item *first, struct single_item **cur, int n)
 {
         struct single_item *tmp;
         int k;
         if (!*cur)
-                return;
+                return 0;
         switch (n) {
         case 'P': case 'p':
                 tmp = first;
                 k = (*cur)->data;
-                if (tmp->data != k)
-                         /* TODO search by *cur */
-                        while(tmp->next->data != k)
-                                tmp = tmp->next;
+                if (tmp->data == k)
+                        return 0;
+                 /* TODO search by *cur */
+                while(tmp->next->data != k)
+                        tmp = tmp->next;
                 *cur = tmp;
                 break;
         case 'N': case 'n':
                 if ((*cur)->next)
                         *cur = (*cur)->next;
-                break;
+                else
+                        return 0;
         }
+        return 1;
 }
 
-void change_cur_doubly(struct doubly_item **cur, int n)
+void chcur_doubly(struct doubly_item **cur, int n)
 {
         if (!*cur)
                 return;
@@ -207,12 +217,16 @@ void dispose_node(struct node *r)
 void dispose_single_cur(struct single_item **first, struct single_item **cur)
 {
         struct single_item *tmp = *cur;
-        if (!cur)
+        int res;
+        if (!*cur)
                 return;
-        if ((*cur)->next)
-                change_cur_single(*first, cur, 'n');
-        else
-                change_cur_single(*first, cur, 'p');
+        if ((*cur)->next) {
+                chcur_single(*first, cur, 'n');
+        } else {
+                res = chcur_single(*first, cur, 'p');
+                if (!res)
+                        *cur = NULL;
+        }
         while (*first != tmp)
                 first = &(*first)->next;
         *first = (*first)->next;
@@ -224,10 +238,14 @@ void dispose_doubly_cur(struct doubly_item **first,
                         struct doubly_item **cur)
 {
         struct doubly_item *tmp = *cur;
+        if (!*cur)
+                return;
         if ((*cur)->next)
-                change_cur_doubly(cur, 'n');
+                chcur_doubly(cur, 'n');
+        else if ((*cur)->prev)
+                chcur_doubly(cur, 'p');
         else
-                change_cur_doubly(cur, 'p');
+                *cur = NULL;
         if (tmp->prev)
                 tmp->prev->next = tmp->next;
         else
@@ -414,10 +432,10 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
         case cmd_chcur:
                 switch (*m) {
                 case mode_single:
-                        change_cur_single(p->s_first, &p->s_cur, val);
+                        chcur_single(p->s_first, &p->s_cur, val);
                         break;
                 case mode_doubly:
-                        change_cur_doubly(&p->d_cur, val);
+                        chcur_doubly(&p->d_cur, val);
                         break;
                 default:
                         break;
