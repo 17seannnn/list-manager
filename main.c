@@ -1,13 +1,5 @@
 /*
- * --------------------------------------------------------------------
- * Refactoring:
- * Remove code repetitions by using macroses for list functions*
- *
- *
- *
- *
- * --------------------------------------------------------------------
- * Later:
+ * TODO
  * Change chcur func:
  *      1) If cur is NULL then in case n is 'N'/'n' we set cur ptr on first ptr,
  *              in case n is 'P'/'p' we set cur ptr on last ptr.
@@ -31,6 +23,40 @@
 #include <stdlib.h>
 
 #define ERR_EOF 1
+
+#define MAKE_DISPOSE_LIST_FUNCTION(MODE) \
+        void dsp_ ## MODE(struct MODE ## _item *first) \
+        { \
+                struct MODE ## _item *tmp; \
+                while (first) { \
+                        tmp = first; \
+                        first = first->next; \
+                        free(tmp); \
+                } \
+        }
+
+#define MAKE_SHOW_LIST_FUNCTION(MODE) \
+        void show_ ## MODE(struct MODE ## _item *first, \
+                           struct MODE ## _item *cur) \
+        { \
+                for (; first; first = first->next) \
+                        printf("%d %c\n", \
+                                first->data, first == cur ? '*' : 0); \
+        }
+
+#define MAKE_SEARCH_LIST_FUNCTION(MODE) \
+        void search_ ## MODE(struct MODE ## _item *first, \
+                             struct MODE ## _item **pcur, \
+                             int n) \
+        { \
+                for (; first; first = first->next) \
+                        if (n == first->data) { \
+                                printf("Found.\n"); \
+                                *pcur = first; \
+                                return; \
+                        } \
+                printf("Not found.\n"); \
+        }
 
 enum mode {
         mode_single = 1,
@@ -179,25 +205,9 @@ void add_node(struct node **r, int n)
                 add_node(&(*r)->right, n);
 }
 
-void dsp_single(struct single_item *first)
-{
-        struct single_item *tmp;
-        while (first) {
-                tmp = first;
-                first = first->next;
-                free(tmp);
-        }
-}
+MAKE_DISPOSE_LIST_FUNCTION(single)
 
-void dsp_doubly(struct doubly_item *first)
-{
-        struct doubly_item *tmp;
-        while (first) {
-                tmp = first;
-                first = first->next;
-                free(tmp);
-        }
-}
+MAKE_DISPOSE_LIST_FUNCTION(doubly)
 
 void dsp_node(struct node *r)
 {
@@ -258,17 +268,9 @@ void dsp_all(struct pointer p)
         dsp_node(p.root);
 }
 
-void show_single(struct single_item *first, struct single_item *cur)
-{
-        for (; first; first = first->next)
-                printf("%d %c\n", first->data, first == cur ? '*' : 0);
-}
+MAKE_SHOW_LIST_FUNCTION(single)
 
-void show_doubly(struct doubly_item *first, struct doubly_item *cur)
-{
-        for (; first; first = first->next)
-                printf("%d %c\n", first->data, first == cur ? '*' : 0);
-}
+MAKE_SHOW_LIST_FUNCTION(doubly)
 
 void show_node(struct node *r)
 {
@@ -279,29 +281,9 @@ void show_node(struct node *r)
         show_node(r->right);
 }
 
-void search_single(struct single_item *first, struct single_item **pcur, int n)
-{
-        for (; first; first = first->next) {
-                if (n == first->data) {
-                        printf("Found.\n");
-                        *pcur = first;
-                        return;
-                }
-        }
-        printf("Not found.\n");
-}
+MAKE_SEARCH_LIST_FUNCTION(single)
 
-void search_doubly(struct doubly_item *first, struct doubly_item **pcur, int n)
-{
-        for (; first; first = first->next) {
-                if (n == first->data) {
-                        printf("Found.\n");
-                        *pcur = first;
-                        return;
-                }
-        }
-        printf("Not found.\n");
-}
+MAKE_SEARCH_LIST_FUNCTION(doubly)
 
 void search_node(struct node *r, int n)
 {
