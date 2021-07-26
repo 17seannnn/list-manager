@@ -100,20 +100,15 @@ Also these commands can be useful too:\n\
 
 int chcur_single(struct single_item *first, struct single_item **cur, int n)
 {
-        struct single_item *tmp;
-        int k;
         if (!*cur)
                 return 0;
         switch (n) {
         case 'P': case 'p':
-                tmp = first;
-                k = (*cur)->data;
-                if (tmp->data == k)
+                if (first == *cur)
                         return 0;
-                 /* TODO search by *cur */
-                while(tmp->next->data != k)
-                        tmp = tmp->next;
-                *cur = tmp;
+                while(first->next != *cur)
+                        first = first->next;
+                *cur = first;
                 break;
         case 'N': case 'n':
                 if ((*cur)->next)
