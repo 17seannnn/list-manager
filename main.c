@@ -1,8 +1,7 @@
 /*
  * --------------------------------------------------------------------
  * Refactoring:
- * Change code style: change args name like cur -> pcur *
- * Remove code repetitions by using macroses for list functions
+ * Remove code repetitions by using macroses for list functions*
  *
  *
  *
@@ -98,69 +97,69 @@ Also these commands can be useful too:\n\
         [Q/q] - quit\n");
 }
 
-int chcur_single(struct single_item *first, struct single_item **cur, int n)
+int chcur_single(struct single_item *first, struct single_item **pcur, int n)
 {
-        if (!*cur)
+        if (!*pcur)
                 return 0;
         switch (n) {
         case 'P': case 'p':
-                if (first == *cur)
+                if (first == *pcur)
                         return 0;
-                while(first->next != *cur)
+                while(first->next != *pcur)
                         first = first->next;
-                *cur = first;
+                *pcur = first;
                 break;
         case 'N': case 'n':
-                if ((*cur)->next)
-                        *cur = (*cur)->next;
+                if ((*pcur)->next)
+                        *pcur = (*pcur)->next;
                 else
                         return 0;
         }
         return 1;
 }
 
-void chcur_doubly(struct doubly_item **cur, int n)
+void chcur_doubly(struct doubly_item **pcur, int n)
 {
-        if (!*cur)
+        if (!*pcur)
                 return;
         switch (n) {
         case 'P': case 'p':
-                if ((*cur)->prev)
-                        *cur = (*cur)->prev;
+                if ((*pcur)->prev)
+                        *pcur = (*pcur)->prev;
                 break;
         case 'N': case 'n':
-                if ((*cur)->next)
-                        *cur = (*cur)->next;
+                if ((*pcur)->next)
+                        *pcur = (*pcur)->next;
                 break;
         }
 }
 
-void add_single(struct single_item **first, struct single_item **cur, int n)
+void add_single(struct single_item **pfirst, struct single_item **pcur, int n)
 {
         struct single_item *tmp;
         tmp = malloc(sizeof(*tmp));
         tmp->data = n;
-        tmp->next = *first;
-        *first = tmp;
-        *cur = tmp;
+        tmp->next = *pfirst;
+        *pfirst = tmp;
+        *pcur = tmp;
 }
 
-void add_doubly(struct doubly_item **first,
-                struct doubly_item **last,
-                struct doubly_item **cur,
+void add_doubly(struct doubly_item **pfirst,
+                struct doubly_item **plast,
+                struct doubly_item **pcur,
                 int n)
 {
         struct doubly_item *tmp;
         tmp = malloc(sizeof(*tmp));
         tmp->data = n;
-        tmp->prev = *last;
+        tmp->prev = *plast;
         tmp->next = NULL;
-        if (*last)
-                (*last)->next = tmp;
+        if (*plast)
+                (*plast)->next = tmp;
         else
-                *first = tmp;
-        *last = tmp;
-        *cur = tmp;
+                *pfirst = tmp;
+        *plast = tmp;
+        *pcur = tmp;
 }
 
 void add_node(struct node **r, int n)
@@ -209,46 +208,46 @@ void dsp_node(struct node *r)
         free(r);
 }
 
-void dsp_cur_single(struct single_item **first, struct single_item **cur)
+void dsp_cur_single(struct single_item **pfirst, struct single_item **pcur)
 {
-        struct single_item *tmp = *cur;
+        struct single_item *tmp = *pcur;
         int res;
-        if (!*cur)
+        if (!*pcur)
                 return;
-        if ((*cur)->next) {
-                chcur_single(*first, cur, 'n');
+        if ((*pcur)->next) {
+                chcur_single(*pfirst, pcur, 'n');
         } else {
-                res = chcur_single(*first, cur, 'p');
+                res = chcur_single(*pfirst, pcur, 'p');
                 if (!res)
-                        *cur = NULL;
+                        *pcur = NULL;
         }
-        while (*first != tmp)
-                first = &(*first)->next;
-        *first = (*first)->next;
+        while (*pfirst != tmp)
+                pfirst = &(*pfirst)->next;
+        *pfirst = (*pfirst)->next;
         free(tmp);
 }
 
-void dsp_cur_doubly(struct doubly_item **first,
-                    struct doubly_item **last,
-                    struct doubly_item **cur)
+void dsp_cur_doubly(struct doubly_item **pfirst,
+                    struct doubly_item **plast,
+                    struct doubly_item **pcur)
 {
-        struct doubly_item *tmp = *cur;
-        if (!*cur)
+        struct doubly_item *tmp = *pcur;
+        if (!*pcur)
                 return;
-        if ((*cur)->next)
-                chcur_doubly(cur, 'n');
-        else if ((*cur)->prev)
-                chcur_doubly(cur, 'p');
+        if ((*pcur)->next)
+                chcur_doubly(pcur, 'n');
+        else if ((*pcur)->prev)
+                chcur_doubly(pcur, 'p');
         else
-                *cur = NULL;
+                *pcur = NULL;
         if (tmp->prev)
                 tmp->prev->next = tmp->next;
         else
-                *first = tmp->next;
+                *pfirst = tmp->next;
         if (tmp->next)
                 tmp->next->prev = tmp->prev;
         else
-                *last = tmp->prev;
+                *plast = tmp->prev;
         free(tmp);
 }
 
@@ -280,24 +279,24 @@ void show_node(struct node *r)
         show_node(r->right);
 }
 
-void search_single(struct single_item *first, struct single_item **cur, int n)
+void search_single(struct single_item *first, struct single_item **pcur, int n)
 {
         for (; first; first = first->next) {
                 if (n == first->data) {
                         printf("Found.\n");
-                        *cur = first;
+                        *pcur = first;
                         return;
                 }
         }
         printf("Not found.\n");
 }
 
-void search_doubly(struct doubly_item *first, struct doubly_item **cur, int n)
+void search_doubly(struct doubly_item *first, struct doubly_item **pcur, int n)
 {
         for (; first; first = first->next) {
                 if (n == first->data) {
                         printf("Found.\n");
-                        *cur = first;
+                        *pcur = first;
                         return;
                 }
         }
@@ -323,9 +322,9 @@ void search_node(struct node *r, int n)
 void change_mode(enum mode *m, int val)
 {
         switch (val) {
-        case 'S': case 's': *m = mode_single;  break;
-        case 'D': case 'd': *m = mode_doubly;  break;
-        case 'B': case 'b': *m = mode_bintree; break;
+        case   0: case 'S': case 's': *m = mode_single;  break;
+        case 'D': case 'd':           *m = mode_doubly;  break;
+        case 'B': case 'b':           *m = mode_bintree; break;
         }
 }
 
