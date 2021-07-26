@@ -1,9 +1,8 @@
 /*
  * --------------------------------------------------------------------
  * Refactoring:
+ * Change code style: simplify funcs` name, change args name like cur -> pcur
  * Remove code repetitions by using macroses for list functions
- * Change code style: switch, simplify funcs` name,
- *                                      change args name like cur -> pcur
  *
  *
  *
@@ -11,6 +10,7 @@
  * Later:
  * Add version cmd
  * Add options
+ * Add show cur cmd, change search on '?'
  * Add in current prev or next pointer for single&doubly-linked lists
  * Add_cur, search current also change current pointer
  * Delete change_mode func and use parse_mode for when cmd_chmod
@@ -98,21 +98,19 @@ void change_cur_single(struct single_item *first,
         if (!*cur)
                 return;
         switch (n) {
-                case 'P':
-                case 'p':
-                        tmp = first;
-                        k = (*cur)->data;
-                        if (tmp->data != k)
-                                 /* TODO search by *cur */
-                                while(tmp->next->data != k)
-                                        tmp = tmp->next;
-                        *cur = tmp;
-                        break;
-                case 'N':
-                case 'n':
-                        if ((*cur)->next)
-                                *cur = (*cur)->next;
-                        break;
+        case 'P': case 'p':
+                tmp = first;
+                k = (*cur)->data;
+                if (tmp->data != k)
+                         /* TODO search by *cur */
+                        while(tmp->next->data != k)
+                                tmp = tmp->next;
+                *cur = tmp;
+                break;
+        case 'N': case 'n':
+                if ((*cur)->next)
+                        *cur = (*cur)->next;
+                break;
         }
 }
 
@@ -121,16 +119,14 @@ void change_cur_doubly(struct doubly_item **cur, int n)
         if (!*cur)
                 return;
         switch (n) {
-                case 'P':
-                case 'p':
-                        if ((*cur)->prev)
-                                *cur = (*cur)->prev;
-                        break;
-                case 'N':
-                case 'n':
-                        if ((*cur)->next)
-                                *cur = (*cur)->next;
-                        break;
+        case 'P': case 'p':
+                if ((*cur)->prev)
+                        *cur = (*cur)->prev;
+                break;
+        case 'N': case 'n':
+                if ((*cur)->next)
+                        *cur = (*cur)->next;
+                break;
         }
 }
 
@@ -314,18 +310,9 @@ void search_node(struct node *r, int n)
 void change_mode(enum mode *m, int val)
 {
         switch (val) {
-                case 'S':
-                case 's':
-                        *m = mode_single;
-                        break;
-                case 'D':
-                case 'd':
-                        *m = mode_doubly;
-                        break;
-                case 'B':
-                case 'b':
-                        *m = mode_bintree;
-                        break;
+        case 'S': case 's': *m = mode_single;  break;
+        case 'D': case 'd': *m = mode_doubly;  break;
+        case 'B': case 'b': *m = mode_bintree; break;
         }
 }
 
@@ -336,18 +323,9 @@ enum mode parse_mode()
         printf("Enter mode [S/d/b]: ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
-                        case 'S':
-                        case 's':
-                                m = mode_single;
-                                break;
-                        case 'D':
-                        case 'd':
-                                m = mode_doubly;
-                                break;
-                        case 'B':
-                        case 'b':
-                                m = mode_bintree;
-                                break;
+                case 'S': case 's': m = mode_single;  break;
+                case 'D': case 'd': m = mode_doubly;  break;
+                case 'B': case 'b': m = mode_bintree; break;
                 }
         }
         if (c == EOF) {
@@ -366,38 +344,15 @@ int parse_cmd(enum command *cmd, int *val)
         printf("%% ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
-                        case 'H':
-                        case 'h':
-                                *cmd = cmd_help;
-                                break;
-                        case 'Q':
-                        case 'q':
-                                *cmd = cmd_quit;
-                                break;
-                        case 'M':
-                        case 'm':
-                                *cmd = cmd_chmod;
-                                break;
-                        case 'C':
-                        case 'c':
-                                *cmd = cmd_chcur;
-                                break;
-                        case 'A':
-                        case 'a':
-                                *cmd = cmd_add;
-                                break;
-                        case 'D':
-                                *cmd = cmd_dsp;
-                                break;
-                        case 'd':
-                                *cmd = cmd_dsp_cur;
-                                break;
-                        case 'S':
-                                *cmd = cmd_show;
-                                break;
-                        case 's':
-                                *cmd = cmd_search;
-                                break;
+                case 'H': case 'h': *cmd = cmd_help;    break;
+                case 'Q': case 'q': *cmd = cmd_quit;    break;
+                case 'M': case 'm': *cmd = cmd_chmod;   break;
+                case 'C': case 'c': *cmd = cmd_chcur;   break;
+                case 'A': case 'a': *cmd = cmd_add;     break;
+                case 'D':           *cmd = cmd_dsp;     break;
+                case 'd':           *cmd = cmd_dsp_cur; break;
+                case 'S':           *cmd = cmd_show;    break;
+                case 's':           *cmd = cmd_search;  break;
                 }
         }
         if (c == EOF) {
@@ -405,48 +360,35 @@ int parse_cmd(enum command *cmd, int *val)
                 return 0;
         }
         switch (*cmd) {
-                case cmd_chmod:
-                case cmd_chcur:
-                case cmd_add:
-                case cmd_search:
-                        printf("%s ",
-                               *cmd == cmd_chmod ? "mode [S/d/b]" : "val:");
-                        while ((c = getchar()) != '\n' && c != EOF) {
-                                switch (c) {
-                                        case '-':
-                                                negative = 1;
-                                                break;
-                                        case '0':
-                                        case '1':
-                                        case '2':
-                                        case '3':
-                                        case '4':
-                                        case '5':
-                                        case '6':
-                                        case '7':
-                                        case '8':
-                                        case '9':
-                                                *val = *val * 10 + c - '0';
-                                                break;
-                                        case 'S':
-                                        case 's':
-                                        case 'D':
-                                        case 'd':
-                                        case 'B':
-                                        case 'b':
-                                        case 'P':
-                                        case 'p':
-                                        case 'N':
-                                        case 'n':
-                                                *val = c;
-                                                break;
-                                }
+        case cmd_chmod:
+        case cmd_chcur:
+        case cmd_add:
+        case cmd_search:
+                printf("%s ",
+                       *cmd == cmd_chmod ? "mode [S/d/b]" : "val:");
+                while ((c = getchar()) != '\n' && c != EOF) {
+                        switch (c) {
+                        case '-':
+                                negative = 1;
+                                break;
+                        case '0': case '1': case '2': case '3': case '4':
+                        case '5': case '6': case '7': case '8': case '9':
+                                *val = *val * 10 + c - '0';
+                                break;
+                        case 'S': case 's':
+                        case 'D': case 'd':
+                        case 'B': case 'b':
+                        case 'P': case 'p':
+                        case 'N': case 'n':
+                                *val = c;
+                                break;
                         }
-                        if (negative)
-                                *val *= -1;
-                        break;
-                default:
-                        break;
+                }
+                if (negative)
+                        *val *= -1;
+                break;
+        default:
+                break;
         }
         if (c == EOF) {
                 fprintf(stderr, "error: used EOF instead of RETURN\n");
@@ -458,108 +400,96 @@ int parse_cmd(enum command *cmd, int *val)
 int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
 {
         switch (cmd) {
-                case cmd_nothing:
-                        help_short();
+        case cmd_nothing:
+                help_short();
+                break;
+        case cmd_help:
+                help_full();
+                break;
+        case cmd_quit:
+                return 0;
+        case cmd_chmod:
+                change_mode(m, val);
+                break;
+        case cmd_chcur:
+                switch (*m) {
+                case mode_single:
+                        change_cur_single(p->s_first, &p->s_cur, val);
                         break;
-                case cmd_help:
-                        help_full();
+                case mode_doubly:
+                        change_cur_doubly(&p->d_cur, val);
                         break;
-                case cmd_quit:
-                        return 0;
-                case cmd_chmod:
-                        change_mode(m, val);
+                default:
                         break;
-                case cmd_chcur:
-                        switch (*m) {
-                                case mode_single:
-                                        change_cur_single(p->s_first,
-                                                          &p->s_cur,
-                                                          val);
-                                        break;
-                                case mode_doubly:
-                                        change_cur_doubly(&p->d_cur, val);
-                                        break;
-                                default:
-                                        break;
-                        }
+                }
+                break;
+        case cmd_add:
+                switch (*m) {
+                case mode_single:
+                        add_single(&p->s_first, &p->s_cur, val);
                         break;
-                case cmd_add:
-                        switch (*m) {
-                                case mode_single:
-                                        add_single(&p->s_first, &p->s_cur, val);
-                                        break;
-                                case mode_doubly:
-                                        add_doubly(&p->d_first,
-                                                   &p->d_last,
-                                                   &p->d_cur,
-                                                   val);
-                                        break;
-                                case mode_bintree:
-                                        add_node(&p->root, val);
-                                        break;
-                        }
+                case mode_doubly:
+                        add_doubly(&p->d_first, &p->d_last, &p->d_cur, val);
                         break;
-                case cmd_dsp:
-                        switch (*m) {
-                                case mode_single:
-                                        dispose_single(p->s_first);
-                                        p->s_first = NULL;
-                                        break;
-                                case mode_doubly:
-                                        dispose_doubly(p->d_first);
-                                        p->d_first = p->d_last = NULL;
-                                        break;
-                                case mode_bintree:
-                                        dispose_node(p->root);
-                                        p->root = NULL;
-                                        break;
-                        }
+                case mode_bintree:
+                        add_node(&p->root, val);
                         break;
-                case cmd_dsp_cur:
-                        switch (*m) {
-                                case mode_single:
-                                        dispose_single_cur(&p->s_first,
-                                                           &p->s_cur);
-                                        break;
-                                case mode_doubly:
-                                        dispose_doubly_cur(&p->d_first,
-                                                           &p->d_last,
-                                                           &p->d_cur);
-                                        break;
-                                default:
-                                        break;
-                        }
+                }
+                break;
+        case cmd_dsp:
+                switch (*m) {
+                case mode_single:
+                        dispose_single(p->s_first);
+                        p->s_first = NULL;
                         break;
-                case cmd_show:
-                        switch (*m) {
-                                case mode_single:
-                                        show_single(p->s_first, p->s_cur);
-                                        break;
-                                case mode_doubly:
-                                        show_doubly(p->d_first, p->d_cur);
-                                        break;
-                                case mode_bintree:
-                                        show_node(p->root);
-                                        break;
-                        }
+                case mode_doubly:
+                        dispose_doubly(p->d_first);
+                        p->d_first = p->d_last = NULL;
                         break;
-                case cmd_search:
-                        switch (*m) {
-                                case mode_single:
-                                        search_single(p->s_first,
-                                                      &p->s_cur,
-                                                      val);
-                                        break;
-                                case mode_doubly:
-                                        search_doubly(p->d_first,
-                                                      &p->d_cur,
-                                                      val);
-                                        break;
-                                case mode_bintree:
-                                        search_node(p->root, val);
-                                        break;
-                        }
+                case mode_bintree:
+                        dispose_node(p->root);
+                        p->root = NULL;
                         break;
+                }
+                break;
+        case cmd_dsp_cur:
+                switch (*m) {
+                case mode_single:
+                        dispose_single_cur(&p->s_first, &p->s_cur);
+                        break;
+                case mode_doubly:
+                        dispose_doubly_cur(&p->d_first, &p->d_last, &p->d_cur);
+                        break;
+                default:
+                        break;
+                }
+                break;
+        case cmd_show:
+                switch (*m) {
+                case mode_single:
+                        show_single(p->s_first, p->s_cur);
+                        break;
+                case mode_doubly:
+                        show_doubly(p->d_first, p->d_cur);
+                        break;
+                case mode_bintree:
+                        show_node(p->root);
+                        break;
+                }
+                break;
+        case cmd_search:
+                switch (*m) {
+                case mode_single:
+                        search_single(p->s_first, &p->s_cur, val);
+                        break;
+                case mode_doubly:
+                        search_doubly(p->d_first, &p->d_cur, val);
+                        break;
+                case mode_bintree:
+                        search_node(p->root, val);
+                        break;
+                }
+                break;
         }
         return 1;
 }
