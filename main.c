@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------------------------
  * Refactoring:
- * Change code style: simplify funcs` name *, change args name like cur -> pcur
+ * Change code style: change args name like cur -> pcur *
  * Remove code repetitions by using macroses for list functions
  *
  *
@@ -180,7 +180,7 @@ void add_node(struct node **r, int n)
                 add_node(&(*r)->right, n);
 }
 
-void dispose_single(struct single_item *first)
+void dsp_single(struct single_item *first)
 {
         struct single_item *tmp;
         while (first) {
@@ -190,7 +190,7 @@ void dispose_single(struct single_item *first)
         }
 }
 
-void dispose_doubly(struct doubly_item *first)
+void dsp_doubly(struct doubly_item *first)
 {
         struct doubly_item *tmp;
         while (first) {
@@ -200,16 +200,16 @@ void dispose_doubly(struct doubly_item *first)
         }
 }
 
-void dispose_node(struct node *r)
+void dsp_node(struct node *r)
 {
         if (!r)
                 return;
-        dispose_node(r->left);
-        dispose_node(r->right);
+        dsp_node(r->left);
+        dsp_node(r->right);
         free(r);
 }
 
-void dispose_single_cur(struct single_item **first, struct single_item **cur)
+void dsp_cur_single(struct single_item **first, struct single_item **cur)
 {
         struct single_item *tmp = *cur;
         int res;
@@ -228,9 +228,9 @@ void dispose_single_cur(struct single_item **first, struct single_item **cur)
         free(tmp);
 }
 
-void dispose_doubly_cur(struct doubly_item **first,
-                        struct doubly_item **last,
-                        struct doubly_item **cur)
+void dsp_cur_doubly(struct doubly_item **first,
+                    struct doubly_item **last,
+                    struct doubly_item **cur)
 {
         struct doubly_item *tmp = *cur;
         if (!*cur)
@@ -252,11 +252,11 @@ void dispose_doubly_cur(struct doubly_item **first,
         free(tmp);
 }
 
-void dispose_all(struct pointer p)
+void dsp_all(struct pointer p)
 {
-        dispose_single(p.s_first);
-        dispose_doubly(p.d_first);
-        dispose_node(p.root);
+        dsp_single(p.s_first);
+        dsp_doubly(p.d_first);
+        dsp_node(p.root);
 }
 
 void show_single(struct single_item *first, struct single_item *cur)
@@ -452,15 +452,15 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
         case cmd_dsp:
                 switch (*m) {
                 case mode_single:
-                        dispose_single(p->s_first);
+                        dsp_single(p->s_first);
                         p->s_first = NULL;
                         break;
                 case mode_doubly:
-                        dispose_doubly(p->d_first);
+                        dsp_doubly(p->d_first);
                         p->d_first = p->d_last = NULL;
                         break;
                 case mode_bintree:
-                        dispose_node(p->root);
+                        dsp_node(p->root);
                         p->root = NULL;
                         break;
                 }
@@ -468,10 +468,10 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
         case cmd_dsp_cur:
                 switch (*m) {
                 case mode_single:
-                        dispose_single_cur(&p->s_first, &p->s_cur);
+                        dsp_cur_single(&p->s_first, &p->s_cur);
                         break;
                 case mode_doubly:
-                        dispose_doubly_cur(&p->d_first, &p->d_last, &p->d_cur);
+                        dsp_cur_doubly(&p->d_first, &p->d_last, &p->d_cur);
                         break;
                 default:
                         break;
@@ -525,6 +525,6 @@ int main()
                 if (!res)
                         break;
         }
-        dispose_all(p);
+        dsp_all(p);
         return 0;
 }
