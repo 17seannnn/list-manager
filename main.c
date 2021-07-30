@@ -1,7 +1,8 @@
 /*
  *                                   TODO
  * Now:
- * Add version cmd
+ * Count version *
+ * Add license *
  * Add show cur cmd, change search on '?'
  *
  * Divide code on parts
@@ -29,10 +30,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define OPT_HELP_FULL "--help"
+#define PROGRAM_NAME "lm"
+#define PROGRAM_NAME_FULL "list manager"
+#define PROGRAM_EMAIL "17seannnn@gmail.com"
+#define PROGRAM_PAGE "https://github.com/17sean/list-manager"
+
+#define VERSION "?"
+
+#define AUTHOR "17sean"
+#define AUTHOR_PAGE "https://github.com/17sean"
+
 #define OPT_HELP_SHORT "-h"
-#define OPT_VERSION_FULL "--version"
+#define OPT_HELP_FULL "--help"
 #define OPT_VERSION_SHORT "-v"
+#define OPT_VERSION_FULL "--version"
 
 #define ERR_EOF 1
 
@@ -110,6 +121,47 @@ struct pointer {
         struct node *root;
 };
 
+void help_opt()
+{
+        printf("\
+Usage: %s [OPTION]\n\
+\n\
+Options:\n\
+        -h, --help      this help\n\
+        -v, --version   show version\n\
+\n\
+If you find bugs: %s\n\
+lm home page <%s>\n",
+               PROGRAM_NAME, PROGRAM_EMAIL, PROGRAM_PAGE);
+}
+
+void version_opt()
+{
+        printf("\
+%s (%s) %s\n\
+No license.\n\
+\n\
+Written by %s.\n\
+Github: <%s>\n",
+               PROGRAM_NAME, PROGRAM_NAME_FULL, VERSION, AUTHOR, AUTHOR_PAGE);
+}
+
+int handle_opts(char **argv)
+{
+        argv++;
+        for (; *argv; argv++)
+                if (!strcmp(*argv, OPT_HELP_SHORT) ||
+                    !strcmp(*argv, OPT_HELP_FULL)) {
+                        help_opt();
+                        return 0;
+                } else if (!strcmp(*argv, OPT_VERSION_FULL) ||
+                           !strcmp(*argv, OPT_VERSION_SHORT)) {
+                        version_opt();
+                        return 0;
+                }
+        return 1;
+}
+
 void help_short()
 {
         printf("Invalid command, try 'h' for help\n");
@@ -133,25 +185,6 @@ You can manage dynamic data structures by these commands:\n\
 Also these commands can be useful too:\n\
         [H/h] - this help\n\
         [Q/q] - quit\n");
-}
-
-int handle_opts(char **argv)
-{
-        argv++;
-        for (; *argv; argv++) {
-                if (!strcmp(*argv, OPT_HELP_FULL) ||
-                    !strcmp(*argv, OPT_HELP_SHORT)) {
-                        help_full();
-                        return 0;
-                } /* else if (!strcmp(*argv, OPT_VERSION_FULL)) {
-                        version_full();
-                        return 0;
-                } else if (!strcmp(*argv, OPT_VERSION_SHORT)) {
-                        version_short();
-                        return 0;
-                } */
-        }
-        return 1;
 }
 
 int chcur_single(struct single_item *first, struct single_item **pcur, int n)
