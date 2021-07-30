@@ -2,8 +2,10 @@
  *                                   TODO
  * Now:
  * Add version cmd
- * Add options
  * Add show cur cmd, change search on '?'
+ *
+ * Divide code on parts
+ * Use my functions for operations with strings
  *
  * Later:
  * Delete change_mode func and use parse_mode for when cmd_chmod
@@ -25,6 +27,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define OPT_HELP_FULL "--help"
+#define OPT_HELP_SHORT "-h"
+#define OPT_VERSION_FULL "--version"
+#define OPT_VERSION_SHORT "-v"
 
 #define ERR_EOF 1
 
@@ -125,6 +133,25 @@ You can manage dynamic data structures by these commands:\n\
 Also these commands can be useful too:\n\
         [H/h] - this help\n\
         [Q/q] - quit\n");
+}
+
+int handle_opts(char **argv)
+{
+        argv++;
+        for (; *argv; argv++) {
+                if (!strcmp(*argv, OPT_HELP_FULL) ||
+                    !strcmp(*argv, OPT_HELP_SHORT)) {
+                        help_full();
+                        return 0;
+                } /* else if (!strcmp(*argv, OPT_VERSION_FULL)) {
+                        version_full();
+                        return 0;
+                } else if (!strcmp(*argv, OPT_VERSION_SHORT)) {
+                        version_short();
+                        return 0;
+                } */
+        }
+        return 1;
 }
 
 int chcur_single(struct single_item *first, struct single_item **pcur, int n)
@@ -492,13 +519,15 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
         return 1;
 }
 
-int main()
+int main(int argc, char **argv)
 {
         struct pointer p = { NULL, NULL, NULL, NULL, NULL, NULL };
         enum mode m;
         enum command cmd;
         int val;
         int res;
+        if (!handle_opts(argv))
+                return 0;
         m = parse_mode();
         if (!m)
                 return ERR_EOF;
