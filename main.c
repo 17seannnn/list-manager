@@ -1,13 +1,14 @@
 /*
  *                                   TODO
  * Now:
- * Add show cur cmd, change search on '?'
  *
- * Divide code on parts
- * Use my functions for operations with strings
+ * Divide code on parts *
+ * Add info to Install in README
  *
  * Later:
+ * Add show cur cmd, change search on '?'
  * Delete change_mode func and use parse_mode for when cmd_chmod
+ * Use my functions for operations with strings
  *
  * Add in current prev or next pointer for single&doubly-linked lists
  * Add_cur, search current also change current pointer
@@ -27,6 +28,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "opts.h"
 
 #define PROGRAM_NAME "lm"
 #define PROGRAM_NAME_FULL "list manager"
