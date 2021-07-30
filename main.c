@@ -29,7 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "opts.h"
+#include "option.h"
 
 #define PROGRAM_NAME "lm"
 #define PROGRAM_NAME_FULL "list manager"
@@ -150,7 +150,7 @@ Github: <%s>\n",
                AUTHOR, AUTHOR_NICKNAME, AUTHOR_PAGE);
 }
 
-int handle_opts(char **argv)
+int handle_option(char **argv)
 {
         argv++;
         for (; *argv; argv++)
@@ -563,7 +563,7 @@ int main(int argc, char **argv)
         enum command cmd;
         int val;
         int res;
-        if (!handle_opts(argv))
+        if (!handle_option(argv))
                 return 0;
         m = parse_mode();
         if (!m)
