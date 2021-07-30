@@ -314,7 +314,7 @@ enum mode parse_mode()
 {
         enum mode m = mode_single;
         int c;
-        printf("Enter mode [S/d/b]: ");
+        printf("mode [S/d/b]: ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
                 case 'S': case 's': m = mode_single;  break;
