@@ -335,7 +335,7 @@ int parse_cmd(enum command *cmd, int *val)
         int negative = 0;
         *cmd = cmd_nothing;
         *val = 0;
-        printf("%% ");
+        printf("(lm) %% ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
                 case 'H': case 'h': *cmd = cmd_help;    break;
