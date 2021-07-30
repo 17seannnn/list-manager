@@ -1,22 +1,26 @@
 /*
- * TODO
+ *                                   TODO
+ * Now:
+ * Add version cmd
+ * Add options
+ * Add show cur cmd, change search on '?'
+ *
+ * Later:
+ * Delete change_mode func and use parse_mode for when cmd_chmod
+ *
+ * Add in current prev or next pointer for single&doubly-linked lists
+ * Add_cur, search current also change current pointer
+ *
+ * Remove value parsing from parse_cmd, add parse_value
+ * Delete node: user enter the value and we delete node with this value
+ * Improve README
+ *
+ * Much later:
  * Change chcur func:
  *      1) If cur is NULL then in case n is 'N'/'n' we set cur ptr on first ptr,
  *              in case n is 'P'/'p' we set cur ptr on last ptr.
  *      2) If next/prev ptr is NULL, then set cur on NULL.
- *      3) Change prev and next by *cur, next change *cur and next free(tmp)
- *
- *
- *
- * Add version cmd
- * Add options
- * Add show cur cmd, change search on '?'
- * Add in current prev or next pointer for single&doubly-linked lists
- * Add_cur, search current also change current pointer
- * Delete change_mode func and use parse_mode for when cmd_chmod
- * Remove value parsing from parse_cmd, add parse_value get
- * Improve README
- * Delete node: user enter the value and we delete node with this value
+ *      3) int -> void chcur_single(), remove res = chcur_single()
  */
 
 #include <stdio.h>
