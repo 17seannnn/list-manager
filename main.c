@@ -1,8 +1,6 @@
 /*
  *                                   TODO
  * Now:
- * Count version *
- * Add license *
  * Add show cur cmd, change search on '?'
  *
  * Divide code on parts
@@ -35,9 +33,10 @@
 #define PROGRAM_EMAIL "17seannnn@gmail.com"
 #define PROGRAM_PAGE "https://github.com/17sean/list-manager"
 
-#define VERSION "?"
+#define VERSION "1.11b"
 
-#define AUTHOR "17sean"
+#define AUTHOR "Sergey Nikonov"
+#define AUTHOR_NICKNAME "17sean"
 #define AUTHOR_PAGE "https://github.com/17sean"
 
 #define OPT_HELP_SHORT "-h"
@@ -131,19 +130,21 @@ Options:\n\
         -v, --version   show version\n\
 \n\
 If you find bugs: %s\n\
-lm home page <%s>\n",
-               PROGRAM_NAME, PROGRAM_EMAIL, PROGRAM_PAGE);
+%s home page <%s>\n",
+               PROGRAM_NAME, PROGRAM_EMAIL, PROGRAM_NAME, PROGRAM_PAGE);
 }
 
 void version_opt()
 {
         printf("\
 %s (%s) %s\n\
-No license.\n\
+Copyright (c) 2021 17sean\n\
+License MIT: <https://opensource.org/licenses/MIT>\n\
 \n\
-Written by %s.\n\
+Written by %s (%s).\n\
 Github: <%s>\n",
-               PROGRAM_NAME, PROGRAM_NAME_FULL, VERSION, AUTHOR, AUTHOR_PAGE);
+               PROGRAM_NAME, PROGRAM_NAME_FULL, VERSION,
+               AUTHOR, AUTHOR_NICKNAME, AUTHOR_PAGE);
 }
 
 int handle_opts(char **argv)
