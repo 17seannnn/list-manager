@@ -32,6 +32,7 @@
 #include "mode.h"
 #include "help.h"
 #include "macrofunc_list.h"
+#include "single.h"
 #include "error.h"
 
 enum command {
@@ -45,11 +46,6 @@ enum command {
         cmd_dsp_cur,
         cmd_show,
         cmd_search
-};
-
-struct single_item {
-        int data;
-        struct single_item *next;
 };
 
 struct doubly_item {
@@ -68,27 +64,6 @@ struct pointer {
         struct node *root;
 };
 
-int chcur_single(struct single_item *first, struct single_item **pcur, int n)
-{
-        if (!*pcur)
-                return 0;
-        switch (n) {
-        case 'P': case 'p':
-                if (first == *pcur)
-                        return 0;
-                while(first->next != *pcur)
-                        first = first->next;
-                *pcur = first;
-                break;
-        case 'N': case 'n':
-                if ((*pcur)->next)
-                        *pcur = (*pcur)->next;
-                else
-                        return 0;
-        }
-        return 1;
-}
-
 void chcur_doubly(struct doubly_item **pcur, int n)
 {
         if (!*pcur)
@@ -103,16 +78,6 @@ void chcur_doubly(struct doubly_item **pcur, int n)
                         *pcur = (*pcur)->next;
                 break;
         }
-}
-
-void add_single(struct single_item **pfirst, struct single_item **pcur, int n)
-{
-        struct single_item *tmp;
-        tmp = malloc(sizeof(*tmp));
-        tmp->data = n;
-        tmp->next = *pfirst;
-        *pfirst = tmp;
-        *pcur = tmp;
 }
 
 void add_doubly(struct doubly_item **pfirst,
@@ -150,8 +115,6 @@ void add_node(struct node **r, int n)
                 add_node(&(*r)->right, n);
 }
 
-MAKE_DISPOSE_LIST_FUNCTION(single)
-
 MAKE_DISPOSE_LIST_FUNCTION(doubly)
 
 void dsp_node(struct node *r)
@@ -161,25 +124,6 @@ void dsp_node(struct node *r)
         dsp_node(r->left);
         dsp_node(r->right);
         free(r);
-}
-
-void dsp_cur_single(struct single_item **pfirst, struct single_item **pcur)
-{
-        struct single_item *tmp = *pcur;
-        int res;
-        if (!*pcur)
-                return;
-        if ((*pcur)->next) {
-                chcur_single(*pfirst, pcur, 'n');
-        } else {
-                res = chcur_single(*pfirst, pcur, 'p');
-                if (!res)
-                        *pcur = NULL;
-        }
-        while (*pfirst != tmp)
-                pfirst = &(*pfirst)->next;
-        *pfirst = (*pfirst)->next;
-        free(tmp);
 }
 
 void dsp_cur_doubly(struct doubly_item **pfirst,
@@ -213,8 +157,6 @@ void dsp_all(struct pointer p)
         dsp_node(p.root);
 }
 
-MAKE_SHOW_LIST_FUNCTION(single)
-
 MAKE_SHOW_LIST_FUNCTION(doubly)
 
 void show_node(struct node *r)
@@ -225,8 +167,6 @@ void show_node(struct node *r)
         printf("%d\n", r->val);
         show_node(r->right);
 }
-
-MAKE_SEARCH_LIST_FUNCTION(single)
 
 MAKE_SEARCH_LIST_FUNCTION(doubly)
 
