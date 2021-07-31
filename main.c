@@ -34,6 +34,7 @@
 #include "macrofunc_list.h"
 #include "single.h"
 #include "doubly.h"
+#include "bintree.h"
 #include "error.h"
 
 enum command {
@@ -49,73 +50,17 @@ enum command {
         cmd_search
 };
 
-struct node {
-        int val;
-        struct node *left, *right; 
-};
-
 struct pointer {
         struct single_item *s_first, *s_cur;
         struct doubly_item *d_first, *d_last, *d_cur;
         struct node *root;
 };
 
-void add_node(struct node **r, int n)
-{
-        if (!*r) {
-                *r = malloc(sizeof(*r));
-                (*r)->val   = n;
-                (*r)->left  = NULL;
-                (*r)->right = NULL;
-                return;
-        }
-        if ((*r)->val == n)
-                return;
-        if (n < (*r)->val)
-                add_node(&(*r)->left, n);
-        else
-                add_node(&(*r)->right, n);
-}
-
-void dsp_node(struct node *r)
-{
-        if (!r)
-                return;
-        dsp_node(r->left);
-        dsp_node(r->right);
-        free(r);
-}
-
 void dsp_all(struct pointer p)
 {
         dsp_single(p.s_first);
         dsp_doubly(p.d_first);
         dsp_node(p.root);
-}
-
-void show_node(struct node *r)
-{
-        if (!r)
-                return;
-        show_node(r->left);
-        printf("%d\n", r->val);
-        show_node(r->right);
-}
-
-void search_node(struct node *r, int n)
-{
-        if (!r) {
-                printf("Not found.\n");
-                return;
-        }
-        if (r->val == n) {
-                printf("Found.\n");
-                return;
-        }
-        if (n < r->val)
-                search_node(r->left, n);
-        else
-                search_node(r->right, n);
 }
 
 int parse_cmd(enum command *cmd, int *val)
