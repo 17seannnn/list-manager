@@ -21,12 +21,13 @@ void version_option()
 {
         printf("\
 %s (%s) %s\n\
-Copyright (c) 2021 17sean\n\
+Copyright (c) 2021 %s (%s)\n\
 License MIT: <https://opensource.org/licenses/MIT>\n\
 \n\
 Written by %s (%s).\n\
 Github: <%s>\n",
                PROGRAM_NAME, PROGRAM_NAME_FULL, VERSION,
+               AUTHOR, AUTHOR_NICKNAME,
                AUTHOR, AUTHOR_NICKNAME, AUTHOR_PAGE);
 }
 
