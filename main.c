@@ -35,6 +35,7 @@
 #include "single.h"
 #include "doubly.h"
 #include "bintree.h"
+#include "pointer.h"
 #include "error.h"
 
 enum command {
@@ -48,12 +49,6 @@ enum command {
         cmd_dsp_cur,
         cmd_show,
         cmd_search
-};
-
-struct pointer {
-        struct single_item *s_first, *s_cur;
-        struct doubly_item *d_first, *d_last, *d_cur;
-        struct node *root;
 };
 
 void dsp_all(struct pointer p)
