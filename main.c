@@ -30,8 +30,7 @@
 
 #include "option.h"
 #include "mode.h"
-
-#define ERR_EOF 1
+#include "error.h"
 
 #define MAKE_DISPOSE_LIST_FUNCTION(MODE) \
         void dsp_ ## MODE(struct MODE ## _item *first) \
