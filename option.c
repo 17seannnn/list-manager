@@ -3,7 +3,7 @@
 
 #include "option.h"
 
-void help_opt()
+void help_option()
 {
         printf("\
 Usage: %s [OPTION]\n\
@@ -17,7 +17,7 @@ If you find bugs: %s\n\
                PROGRAM_NAME, PROGRAM_EMAIL, PROGRAM_NAME, PROGRAM_PAGE);
 }
 
-void version_opt()
+void version_option()
 {
         printf("\
 %s (%s) %s\n\
@@ -34,13 +34,13 @@ int handle_option(char **argv)
 {
         argv++;
         for (; *argv; argv++)
-                if (!strcmp(*argv, OPT_HELP_SHORT) ||
-                    !strcmp(*argv, OPT_HELP_FULL)) {
-                        help_opt();
+                if (!strcmp(*argv, OPTION_HELP_SHORT) ||
+                    !strcmp(*argv, OPTION_HELP_FULL)) {
+                        help_option();
                         return 0;
-                } else if (!strcmp(*argv, OPT_VERSION_FULL) ||
-                           !strcmp(*argv, OPT_VERSION_SHORT)) {
-                        version_opt();
+                } else if (!strcmp(*argv, OPTION_VERSION_FULL) ||
+                           !strcmp(*argv, OPTION_VERSION_SHORT)) {
+                        version_option();
                         return 0;
                 }
         return 1;

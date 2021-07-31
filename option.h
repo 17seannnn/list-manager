@@ -12,13 +12,13 @@
 #define AUTHOR_NICKNAME "17sean"
 #define AUTHOR_PAGE "https://github.com/17sean"
 
-#define OPT_HELP_SHORT "-h"
-#define OPT_HELP_FULL "--help"
-#define OPT_VERSION_SHORT "-v"
-#define OPT_VERSION_FULL "--version"
+#define OPTION_HELP_SHORT "-h"
+#define OPTION_HELP_FULL "--help"
+#define OPTION_VERSION_SHORT "-v"
+#define OPTION_VERSION_FULL "--version"
 
-void help_opt();
-void version_opt();
+void help_option();
+void version_option();
 int handle_option(char **argv);
 
 #endif
