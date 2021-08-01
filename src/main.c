@@ -42,7 +42,7 @@ int main(int argc, char **argv)
         enum command cmd;
         int val;
         int res;
-        if (!handle_option(argv))
+        if (!handle_opt(argv))
                 return 0;
         m = parse_mode();
         if (!m)

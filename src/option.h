@@ -17,8 +17,6 @@
 #define OPTION_VERSION_SHORT "-v"
 #define OPTION_VERSION_FULL "--version"
 
-void help_option();
-void version_option();
-int  handle_option(char **argv);
+int handle_opt(char **argv);
 
 #endif
