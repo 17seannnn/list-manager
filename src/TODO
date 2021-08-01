@@ -1,8 +1,4 @@
-Now:
-        Divide code on parts *
-        Add info to Install in README
-
-Later:
+TODO:
         Add show cur cmd, change search on '?'
         Delete change_mode func and use parse_mode for when cmd_chmod
         Use my functions for operations with strings
