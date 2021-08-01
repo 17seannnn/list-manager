@@ -32,14 +32,8 @@
 #include "pointer.h"
 #include "mode.h"
 #include "cmd.h"
+#include "dsp_all.h"
 #include "error.h"
-
-void dsp_all(struct pointer p)
-{
-        dsp_single(p.s_first);
-        dsp_doubly(p.d_first);
-        dsp_node(p.root);
-}
 
 int main(int argc, char **argv)
 {
