@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "pointer.h"
 #include "mode.h"
+#include "pointer.h"
 #include "help.h"
 #include "single.h"
 #include "doubly.h"

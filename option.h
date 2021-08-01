@@ -19,6 +19,6 @@
 
 void help_option();
 void version_option();
-int handle_option(char **argv);
+int  handle_option(char **argv);
 
 #endif

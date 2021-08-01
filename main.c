@@ -29,13 +29,8 @@
 #include <stdlib.h>
 
 #include "option.h"
-#include "mode.h"
-#include "help.h"
-#include "macrofunc_list.h"
-#include "single.h"
-#include "doubly.h"
-#include "bintree.h"
 #include "pointer.h"
+#include "mode.h"
 #include "cmd.h"
 #include "error.h"
 
