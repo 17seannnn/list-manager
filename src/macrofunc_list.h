@@ -18,7 +18,7 @@
         { \
                 for (; first; first = first->next) \
                         printf("%d %c\n", \
-                                first->data, first == cur ? '*' : 0); \
+                               first->data, first == cur ? '*' : 0); \
         }
 
 #define MAKE_SHOW_CURRENT_LIST_FUNCTION(MODE) \
