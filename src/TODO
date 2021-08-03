@@ -1,7 +1,5 @@
 TODO:
-        Use my functions for operations with strings *, add `em in README
-
-        Align all printf()
+        Align all printf() *
 
         Remove value parsing from parse_cmd, add parse_value
         Delete node: user enter the value and we delete node with this value

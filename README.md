@@ -16,6 +16,6 @@ binary tree.
 ```bash
 git clone https://github.com/17sean/list-manager.git
 cd list-manager/src
-gcc -c option.c mode.c cmd.c help.c single.c doubly.c bintree.c dsp_all.c
-gcc main.c option.o mode.o cmd.o help.o single.o doubly.o bintree.o dsp_all.o -o lm
+gcc -c lm_string.c option.c mode.c cmd.c help.c single.c doubly.c bintree.c dsp_all.c
+gcc main.c lm_string.o option.o mode.o cmd.o help.o single.o doubly.o bintree.o dsp_all.o -o lm
 ```
