@@ -7,7 +7,6 @@ enum mode {
         mode_bintree
 };
 
-void change_mode(enum mode *m, int val);
 enum mode parse_mode();
 
 #endif

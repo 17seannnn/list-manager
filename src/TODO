@@ -1,6 +1,4 @@
 TODO:
-        Add show cur cmd *
-        Delete change_mode func and use parse_mode for when cmd_chmod
         Use my functions for operations with strings
 
         Remove value parsing from parse_cmd, add parse_value

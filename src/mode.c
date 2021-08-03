@@ -2,15 +2,6 @@
 
 #include "mode.h"
 
-void change_mode(enum mode *m, int val)
-{
-        switch (val) {
-        case   0: case 'S': case 's': *m = mode_single;  break;
-        case 'D': case 'd':           *m = mode_doubly;  break;
-        case 'B': case 'b':           *m = mode_bintree; break;
-        }
-}
-
 enum mode parse_mode()
 {
         enum mode m = mode_single;

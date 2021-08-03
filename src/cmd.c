@@ -35,12 +35,10 @@ int parse_cmd(enum command *cmd, int *val)
                 return 0;
         }
         switch (*cmd) {
-        case cmd_chmod:
         case cmd_chcur:
         case cmd_add:
         case cmd_search:
-                printf("%s ",
-                       *cmd == cmd_chmod ? "mode [S/d/b]" : "val:");
+                printf("val: ");
                 while ((c = getchar()) != '\n' && c != EOF) {
                         switch (c) {
                         case '-':
@@ -50,9 +48,6 @@ int parse_cmd(enum command *cmd, int *val)
                         case '5': case '6': case '7': case '8': case '9':
                                 *val = *val * 10 + c - '0';
                                 break;
-                        case 'S': case 's':
-                        case 'D': case 'd':
-                        case 'B': case 'b':
                         case 'P': case 'p':
                         case 'N': case 'n':
                                 *val = c;
@@ -84,7 +79,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
         case cmd_quit:
                 return 0;
         case cmd_chmod:
-                change_mode(m, val);
+                *m = parse_mode();
                 break;
         case cmd_chcur:
                 switch (*m) {
