@@ -21,6 +21,14 @@
                                 first->data, first == cur ? '*' : 0); \
         }
 
+#define MAKE_SHOW_CURRENT_LIST_FUNCTION(MODE) \
+        void show_cur_ ## MODE(struct MODE ## _item *cur) \
+        { \
+                if (!cur) \
+                        return; \
+                printf("%d *\n", cur->data); \
+        }
+
 #define MAKE_SEARCH_LIST_FUNCTION(MODE) \
         void search_ ## MODE(struct MODE ## _item *first, \
                              struct MODE ## _item **pcur, \

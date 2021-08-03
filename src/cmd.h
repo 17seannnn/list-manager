@@ -11,6 +11,7 @@ enum command {
         cmd_dsp,
         cmd_dsp_cur,
         cmd_show,
+        cmd_show_cur,
         cmd_search
 };
 

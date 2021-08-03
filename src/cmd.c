@@ -18,15 +18,16 @@ int parse_cmd(enum command *cmd, int *val)
         printf("(lm) %% ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
-                case 'H': case 'h': *cmd = cmd_help;    break;
-                case 'Q': case 'q': *cmd = cmd_quit;    break;
-                case 'M': case 'm': *cmd = cmd_chmod;   break;
-                case 'C': case 'c': *cmd = cmd_chcur;   break;
-                case 'A': case 'a': *cmd = cmd_add;     break;
-                case 'D':           *cmd = cmd_dsp;     break;
-                case 'd':           *cmd = cmd_dsp_cur; break;
-                case 'S':           *cmd = cmd_show;    break;
-                case '?':           *cmd = cmd_search;  break;
+                case 'H': case 'h': *cmd = cmd_help;     break;
+                case 'Q': case 'q': *cmd = cmd_quit;     break;
+                case 'M': case 'm': *cmd = cmd_chmod;    break;
+                case 'C': case 'c': *cmd = cmd_chcur;    break;
+                case 'A': case 'a': *cmd = cmd_add;      break;
+                case 'D':           *cmd = cmd_dsp;      break;
+                case 'd':           *cmd = cmd_dsp_cur;  break;
+                case 'S':           *cmd = cmd_show;     break;
+                case 's':           *cmd = cmd_show_cur; break;
+                case '?':           *cmd = cmd_search;   break;
                 }
         }
         if (c == EOF) {
@@ -148,6 +149,18 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         break;
                 case mode_bintree:
                         show_node(p->root);
+                        break;
+                }
+                break;
+        case cmd_show_cur:
+                switch (*m) {
+                case mode_single:
+                        show_cur_single(p->s_cur);
+                        break;
+                case mode_doubly:
+                        show_cur_doubly(p->d_cur);
+                        break;
+                case mode_bintree:
                         break;
                 }
                 break;

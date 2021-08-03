@@ -59,4 +59,6 @@ void dsp_cur_single(struct single_item **pfirst, struct single_item **pcur)
 
 MAKE_SHOW_LIST_FUNCTION(single)
 
+MAKE_SHOW_CURRENT_LIST_FUNCTION(single)
+
 MAKE_SEARCH_LIST_FUNCTION(single)

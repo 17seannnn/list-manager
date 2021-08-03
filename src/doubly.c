@@ -67,4 +67,6 @@ void dsp_cur_doubly(struct doubly_item **pfirst,
 
 MAKE_SHOW_LIST_FUNCTION(doubly)
 
+MAKE_SHOW_CURRENT_LIST_FUNCTION(doubly)
+
 MAKE_SEARCH_LIST_FUNCTION(doubly)

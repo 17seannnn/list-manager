@@ -21,6 +21,7 @@ You can manage dynamic data structures by these commands:\n\
         [D]   - dispose all\n\
         [d]   - dispose current\n\
         [S]   - show all\n\
+        [s]   - show current\n\
         [?]   - search item\n\
 Also these commands can be useful too:\n\
         [H/h] - this help\n\
