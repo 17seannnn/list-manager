@@ -1,5 +1,5 @@
 TODO:
-        Add show cur cmd, change search on '?'
+        Add show cur cmd *
         Delete change_mode func and use parse_mode for when cmd_chmod
         Use my functions for operations with strings
 

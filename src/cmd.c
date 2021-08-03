@@ -26,7 +26,7 @@ int parse_cmd(enum command *cmd, int *val)
                 case 'D':           *cmd = cmd_dsp;     break;
                 case 'd':           *cmd = cmd_dsp_cur; break;
                 case 'S':           *cmd = cmd_show;    break;
-                case 's':           *cmd = cmd_search;  break;
+                case '?':           *cmd = cmd_search;  break;
                 }
         }
         if (c == EOF) {
