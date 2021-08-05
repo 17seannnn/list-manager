@@ -1,9 +1,13 @@
 TODO:
-        add value module in install README and change version *
 
         add goto to clean before return, add exit_status
 
+
         Improve README
+
+        change version *
+
+        Release
 
         Change current in node
         Delete node: user enter the value and we delete node with this value
