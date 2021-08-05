@@ -1,8 +1,6 @@
-#include "lm_string.h"
+#include <stdio.h>
 
-#ifndef EOF
-#define EOF -1
-#endif
+#include "lm_string.h"
 
 int str_equal(const char *s1, const char *s2)
 {

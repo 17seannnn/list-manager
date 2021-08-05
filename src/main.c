@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "option.h"
 #include "pointer.h"
 #include "mode.h"
