@@ -1,16 +1,35 @@
 # List Manager
-Program that give you access to manage dynamic data structures
+**Program that give you access to manage dynamic data structures**
 
 ## Usage
-Three modes:
-- Single-link list
-- Doubly-link list
+```bash
+lm [OPTION]
+```
+
+### Options:
+```
+-h, --help      show help
+-v, --version   show version
+```
+
+### Modes:
+- Single-linked list
+- Doubly-linked list
 - Binary tree
 
-For now you can add items to your structure, dispose them and show them.
-
-Later, i want to add some additional features for doubly-linked list and
-binary tree.
+### Commands:
+```
+[M/m] - change mode
+[C/c] - change current pointer
+[A/a] - add item
+[D]   - dispose all
+[d]   - dispose current
+[S]   - show all
+[s]   - show current
+[?]   - search item
+[H/h] - this help
+[Q/q] - quit
+```
 
 ## Install
 ```bash
