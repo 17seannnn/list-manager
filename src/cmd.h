@@ -2,7 +2,7 @@
 #define CMD_H
 
 enum command {
-        cmd_nothing,
+        cmd_nothing = 0,
         cmd_help,
         cmd_quit,
         cmd_chmod,
@@ -15,7 +15,7 @@ enum command {
         cmd_search
 };
 
-int parse_cmd(enum command *cmd);
-int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m);
+enum command parse_cmd();
+int  handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m);
 
 #endif

@@ -9,30 +9,30 @@
 
 #include "cmd.h"
 
-int parse_cmd(enum command *cmd)
+enum command parse_cmd()
 {
+        enum command cmd = cmd_nothing;
         int c;
-        *cmd = cmd_nothing;
         printf("(lm) %% ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
-                case 'H': case 'h': *cmd = cmd_help;     break;
-                case 'Q': case 'q': *cmd = cmd_quit;     break;
-                case 'M': case 'm': *cmd = cmd_chmod;    break;
-                case 'C': case 'c': *cmd = cmd_chcur;    break;
-                case 'A': case 'a': *cmd = cmd_add;      break;
-                case 'D':           *cmd = cmd_dsp;      break;
-                case 'd':           *cmd = cmd_dsp_cur;  break;
-                case 'S':           *cmd = cmd_show;     break;
-                case 's':           *cmd = cmd_show_cur; break;
-                case '?':           *cmd = cmd_search;   break;
+                case 'H': case 'h': cmd = cmd_help;     break;
+                case 'Q': case 'q': cmd = cmd_quit;     break;
+                case 'M': case 'm': cmd = cmd_chmod;    break;
+                case 'C': case 'c': cmd = cmd_chcur;    break;
+                case 'A': case 'a': cmd = cmd_add;      break;
+                case 'D':           cmd = cmd_dsp;      break;
+                case 'd':           cmd = cmd_dsp_cur;  break;
+                case 'S':           cmd = cmd_show;     break;
+                case 's':           cmd = cmd_show_cur; break;
+                case '?':           cmd = cmd_search;   break;
                 }
         }
         if (c == EOF) {
                 fprintf(stderr, "error: used EOF instead of RETURN\n");
-                return 0;
+                return -1;
         }
-        return 1;
+        return cmd;
 }
 
 int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)

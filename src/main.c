@@ -22,8 +22,8 @@ int main(int argc, char **argv)
         if (!m)
                 return ERR_EOF;
         for (;;) {
-                res = parse_cmd(&cmd);
-                if (!res)
+                cmd = parse_cmd();
+                if (cmd == -1)
                         return ERR_EOF;
                 val = parse_val(cmd);
                 res = handle_cmd(cmd, val, &p, &m);
