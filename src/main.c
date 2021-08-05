@@ -5,6 +5,7 @@
 #include "pointer.h"
 #include "mode.h"
 #include "cmd.h"
+#include "value.h"
 #include "dsp_all.h"
 #include "error.h"
 
@@ -21,9 +22,10 @@ int main(int argc, char **argv)
         if (!m)
                 return ERR_EOF;
         for (;;) {
-                res = parse_cmd(&cmd, &val);
+                res = parse_cmd(&cmd);
                 if (!res)
                         return ERR_EOF;
+                val = parse_val(cmd);
                 res = handle_cmd(cmd, val, &p, &m);
                 if (!res)
                         break;

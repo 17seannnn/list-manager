@@ -9,12 +9,10 @@
 
 #include "cmd.h"
 
-int parse_cmd(enum command *cmd, int *val)
+int parse_cmd(enum command *cmd)
 {
         int c;
-        int negative = 0;
         *cmd = cmd_nothing;
-        *val = 0;
         printf("(lm) %% ");
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
@@ -29,36 +27,6 @@ int parse_cmd(enum command *cmd, int *val)
                 case 's':           *cmd = cmd_show_cur; break;
                 case '?':           *cmd = cmd_search;   break;
                 }
-        }
-        if (c == EOF) {
-                fprintf(stderr, "error: used EOF instead of RETURN\n");
-                return 0;
-        }
-        switch (*cmd) {
-        case cmd_chcur:
-        case cmd_add:
-        case cmd_search:
-                printf("val: ");
-                while ((c = getchar()) != '\n' && c != EOF) {
-                        switch (c) {
-                        case '-':
-                                negative = 1;
-                                break;
-                        case '0': case '1': case '2': case '3': case '4':
-                        case '5': case '6': case '7': case '8': case '9':
-                                *val = *val * 10 + c - '0';
-                                break;
-                        case 'P': case 'p':
-                        case 'N': case 'n':
-                                *val = c;
-                                break;
-                        }
-                }
-                if (negative)
-                        *val *= -1;
-                break;
-        default:
-                break;
         }
         if (c == EOF) {
                 fprintf(stderr, "error: used EOF instead of RETURN\n");

@@ -15,7 +15,7 @@ enum command {
         cmd_search
 };
 
-int parse_cmd(enum command *cmd, int *val);
+int parse_cmd(enum command *cmd);
 int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m);
 
 #endif
