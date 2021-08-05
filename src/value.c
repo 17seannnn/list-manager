@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-#include "cmd.h"
-
 #include "value.h"
 
 int parse_val(enum command cmd)

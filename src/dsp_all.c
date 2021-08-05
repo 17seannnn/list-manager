@@ -1,4 +1,3 @@
-#include "pointer.h"
 #include "single.h"
 #include "doubly.h"
 #include "bintree.h"

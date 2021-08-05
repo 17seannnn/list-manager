@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "option.h"
 #include "pointer.h"
 #include "mode.h"
