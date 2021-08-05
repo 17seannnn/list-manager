@@ -1,6 +1,5 @@
 TODO:
-        refactor: if in header file new structures then add structures` header,
-                                in main.c remove not necessary headers like std
+        refactor: everywhere remove not necessary headers *
         refactor parses stop from smaller value to bigger
 
         add value module in install README

@@ -1,6 +1,9 @@
 #ifndef CMD_H
 #define CMD_H
 
+#include "pointer.h"
+#include "mode.h"
+
 enum command {
         cmd_nothing = 0,
         cmd_help,
