@@ -1,7 +1,5 @@
 TODO:
-        refactor parses stop from smaller value to bigger
-
-        add value module in install README
+        add value module in install README *
 
         return -1 in mode if eof
 
