@@ -16,7 +16,7 @@ enum mode parse_mode()
         }
         if (c == EOF) {
                 fprintf(stderr, "error: used EOF instead of RETURN\n");
-                return 0;
+                return -1;
         }
         return m;
 }

@@ -2,7 +2,7 @@
 #define MODE_H
 
 enum mode {
-        mode_single = 1,
+        mode_single = 0,
         mode_doubly,
         mode_bintree
 };

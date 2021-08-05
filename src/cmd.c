@@ -46,6 +46,8 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 return 0;
         case cmd_chmod:
                 *m = parse_mode();
+                if (*m == -1)
+                        return 0;
                 break;
         case cmd_chcur:
                 switch (*m) {

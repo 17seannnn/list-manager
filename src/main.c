@@ -18,7 +18,7 @@ int main(int argc, char **argv)
         if (!handle_opt(argv))
                 return 0;
         m = parse_mode();
-        if (!m)
+        if (m == -1)
                 return ERR_EOF;
         for (;;) {
                 cmd = parse_cmd();

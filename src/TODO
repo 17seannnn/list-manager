@@ -1,8 +1,6 @@
 TODO:
         add value module in install README *
 
-        return -1 in mode if eof
-
         add goto to clean before return, add exit_status
 
         Improve README
