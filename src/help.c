@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "option.h" /* change on version.h */
+#include "version.h"
 
 #include "help.h"
 
