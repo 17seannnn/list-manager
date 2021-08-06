@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #include "help.h"
 #include "single.h"
 #include "doubly.h"

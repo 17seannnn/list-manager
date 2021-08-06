@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #include "lm_string.h"
 
 #include "option.h"

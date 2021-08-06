@@ -1,8 +1,7 @@
 TODO:
-        Use _LONG suffix for constants` name instead of _FULL *
         Move all version info in version module,
         Move all helps in help module
-        Remove not necessary linebreaks when include headers
+        Remove not necessary linebreaks when include headers *
 
         Change version
         Release
