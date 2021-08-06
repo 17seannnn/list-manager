@@ -1,21 +1,8 @@
 #include <stdio.h>
 #include "lm_string.h"
+#include "help.h"
 
 #include "option.h"
-
-void help_opt()
-{
-        printf("\
-Usage: %s [OPTION]\n\
-\n\
-Options:\n\
-        -h, --help      this help\n\
-        -v, --version   show version\n\
-\n\
-If you find bugs: %s\n\
-%s home page <%s>\n",
-               PROGRAM_NAME, PROGRAM_EMAIL, PROGRAM_NAME, PROGRAM_PAGE);
-}
 
 void version_opt()
 {
