@@ -46,7 +46,7 @@ void show_cur_node(struct node *b_cur)
         printf("%d\n", b_cur->val);
 }
 
-void search_node(struct node *r, int n)
+void search_node(struct node *r, struct node **pcur, int n)
 {
         if (!r) {
                 printf("Not found.\n");
@@ -54,10 +54,11 @@ void search_node(struct node *r, int n)
         }
         if (r->val == n) {
                 printf("Found.\n");
+                *pcur = r;
                 return;
         }
         if (n < r->val)
-                search_node(r->left, n);
+                search_node(r->left, pcur, n);
         else
-                search_node(r->right, n);
+                search_node(r->right, pcur, n);
 }

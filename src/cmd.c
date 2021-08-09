@@ -140,7 +140,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         search_doubly(p->d_first, &p->d_cur, val);
                         break;
                 case mode_bintree:
-                        search_node(p->root, val);
+                        search_node(p->root, &p->b_cur, val);
                         break;
                 }
                 break;
