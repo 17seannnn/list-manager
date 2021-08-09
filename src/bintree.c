@@ -66,7 +66,7 @@ void show_cur_node(struct node *b_cur)
 {
         if (!b_cur || !b_cur->exist)
                 return;
-        printf("%d\n", b_cur->val);
+        printf("%d *\n", b_cur->val);
 }
 
 void search_node(struct node *r, struct node **pcur, int n)
