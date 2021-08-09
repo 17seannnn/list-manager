@@ -89,6 +89,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case mode_bintree:
                         dsp_node(p->root);
                         p->root = NULL;
+                        p->b_cur = NULL;
                         break;
                 }
                 break;
