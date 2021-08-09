@@ -30,6 +30,11 @@ void dsp_node(struct node *r)
         free(r);
 }
 
+void dsp_cur_node(struct node **r, struct node **pcur)
+{
+
+}
+
 void show_node(struct node *r, struct node *cur)
 {
         if (!r)

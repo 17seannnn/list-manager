@@ -8,6 +8,7 @@ struct node {
 
 void add_node(struct node **r, struct node **pcur, int n);
 void dsp_node(struct node *r);
+void dsp_cur_node(struct node **r, struct node **pcur);
 void show_node(struct node *r, struct node *cur);
 void show_cur_node(struct node *cur);
 void search_node(struct node *r, struct node **pcur, int n);
