@@ -78,10 +78,13 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case mode_single:
                         dsp_single(p->s_first);
                         p->s_first = NULL;
+                        p->s_cur = NULL;
                         break;
                 case mode_doubly:
                         dsp_doubly(p->d_first);
-                        p->d_first = p->d_last = NULL;
+                        p->d_first = NULL;
+                        p->d_last = NULL;
+                        p->d_cur = NULL;
                         break;
                 case mode_bintree:
                         dsp_node(p->root);
