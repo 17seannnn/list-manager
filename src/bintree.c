@@ -30,13 +30,13 @@ void dsp_node(struct node *r)
         free(r);
 }
 
-void show_node(struct node *r)
+void show_node(struct node *r, struct node *cur)
 {
         if (!r)
                 return;
-        show_node(r->left);
-        printf("%d\n", r->val);
-        show_node(r->right);
+        show_node(r->left, cur);
+        printf("%d %c\n", r->val, r == cur ? '*' : 0);
+        show_node(r->right, cur);
 }
 
 void show_cur_node(struct node *b_cur)
