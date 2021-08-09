@@ -38,6 +38,13 @@ void show_node(struct node *r)
         show_node(r->right);
 }
 
+void show_cur_node(struct node *b_cur)
+{
+        if (!b_cur)
+                return;
+        printf("%d\n", b_cur->val);
+}
+
 void search_node(struct node *r, int n)
 {
         if (!r) {

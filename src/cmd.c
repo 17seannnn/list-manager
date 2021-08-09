@@ -126,6 +126,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         show_cur_doubly(p->d_cur);
                         break;
                 case mode_bintree:
+                        show_cur_node(p->b_cur);
                         break;
                 }
                 break;
