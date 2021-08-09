@@ -102,7 +102,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         dsp_cur_doubly(&p->d_first, &p->d_last, &p->d_cur);
                         break;
                 default:
-                        dsp_cur_node(&p->root, &p->b_cur);
+                        dsp_cur_node(&p->b_cur);
                         break;
                 }
                 break;

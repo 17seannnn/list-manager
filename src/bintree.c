@@ -7,14 +7,23 @@ void add_node(struct node **r, struct node **pcur, int n)
 {
         if (!*r) {
                 *r = malloc(sizeof(*r));
-                (*r)->val   = n;
-                (*r)->left  = NULL;
+                (*r)->val = n;
+                (*r)->exist = 1;
+                (*r)->left = NULL;
                 (*r)->right = NULL;
                 *pcur = *r;
                 return;
         }
-        if ((*r)->val == n)
-                return;
+        if ((*r)->val == n) {
+                if ((*r)->exist) {
+                        *pcur = *r;
+                        return;
+                } else {
+                        (*r)->exist = 1;
+                        *pcur = *r;
+                        return;
+                }
+        }
         if (n < (*r)->val)
                 add_node(&(*r)->left, pcur, n);
         else
@@ -30,9 +39,17 @@ void dsp_node(struct node *r)
         free(r);
 }
 
-void dsp_cur_node(struct node **r, struct node **pcur)
+void dsp_cur_node(struct node **pcur)
 {
-
+        if (!*pcur)
+                return;
+        (*pcur)->exist = 0;
+        if ((*pcur)->right)
+                *pcur = (*pcur)->right;
+        else if ((*pcur)->left)
+                *pcur = (*pcur)->left;
+        else
+                *pcur = NULL;
 }
 
 void show_node(struct node *r, struct node *cur)
@@ -40,13 +57,14 @@ void show_node(struct node *r, struct node *cur)
         if (!r)
                 return;
         show_node(r->left, cur);
-        printf("%d %c\n", r->val, r == cur ? '*' : 0);
+        if (r->exist)
+                printf("%d %c\n", r->val, r == cur ? '*' : 0);
         show_node(r->right, cur);
 }
 
 void show_cur_node(struct node *b_cur)
 {
-        if (!b_cur)
+        if (!b_cur || !b_cur->exist)
                 return;
         printf("%d\n", b_cur->val);
 }
@@ -57,7 +75,7 @@ void search_node(struct node *r, struct node **pcur, int n)
                 printf("Not found.\n");
                 return;
         }
-        if (r->val == n) {
+        if (r->val == n && r->exist) {
                 printf("Found.\n");
                 *pcur = r;
                 return;

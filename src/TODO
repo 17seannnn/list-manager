@@ -1,6 +1,7 @@
                                      TODO:
 
-        Delete cur node *
+        show_cur_node() print '*' after value
+        Change current node
 
         Change version
         Release
