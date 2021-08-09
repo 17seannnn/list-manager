@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
         int exit_status = 0;
-        struct pointer p = { NULL, NULL, NULL, NULL, NULL, NULL };
+        struct pointer p = { NULL, NULL, NULL, NULL, NULL, NULL, NULL };
         enum mode m;
         enum command cmd;
         int val;
