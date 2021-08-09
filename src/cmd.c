@@ -69,7 +69,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         add_doubly(&p->d_first, &p->d_last, &p->d_cur, val);
                         break;
                 case mode_bintree:
-                        add_node(&p->root, val);
+                        add_node(&p->root, &p->b_cur, val);
                         break;
                 }
                 break;

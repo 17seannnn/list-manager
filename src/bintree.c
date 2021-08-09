@@ -3,21 +3,22 @@
 
 #include "bintree.h"
 
-void add_node(struct node **r, int n)
+void add_node(struct node **r, struct node **pcur, int n)
 {
         if (!*r) {
                 *r = malloc(sizeof(*r));
                 (*r)->val   = n;
                 (*r)->left  = NULL;
                 (*r)->right = NULL;
+                *pcur = *r;
                 return;
         }
         if ((*r)->val == n)
                 return;
         if (n < (*r)->val)
-                add_node(&(*r)->left, n);
+                add_node(&(*r)->left, pcur, n);
         else
-                add_node(&(*r)->right, n);
+                add_node(&(*r)->right, pcur, n);
 }
 
 void dsp_node(struct node *r)
