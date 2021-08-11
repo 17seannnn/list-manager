@@ -1,7 +1,5 @@
                                      TODO:
 
-        In all chcur funcs exists bug that if first NULL we can get seg. fault
-
         Change version
         Release
 
