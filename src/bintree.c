@@ -3,6 +3,32 @@
 
 #include "bintree.h"
 
+void chcur_node(struct node *r, struct node **pcur, int n)
+{
+        if (!r || !*pcur)
+                return;
+        switch (n) {
+        case 'P':
+        case 'p':
+                while (r && (r->left != *pcur && r->right != *pcur))
+                        if ((*pcur)->val < r->val)
+                                r = r->left;
+                        else
+                                r = r->right;
+                if (r)
+                        *pcur = r;
+                break;
+        case 'L':
+        case 'l':
+                *pcur = (*pcur)->left;
+                break;
+        case 'R':
+        case 'r':
+                *pcur = (*pcur)->right;
+                break;
+        }
+}
+
 void add_node(struct node **r, struct node **pcur, int n)
 {
         if (!*r) {

@@ -57,6 +57,7 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         chcur_doubly(&p->d_cur, val);
                         break;
                 default:
+                        chcur_node(p->root, &p->b_cur, val);
                         break;
                 }
                 break;

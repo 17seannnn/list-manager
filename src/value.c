@@ -21,6 +21,8 @@ int parse_val(enum command cmd)
                                 break;
                         case 'P': case 'p':
                         case 'N': case 'n':
+                        case 'L': case 'l':
+                        case 'R': case 'r':
                                 val = c;
                                 break;
                         }

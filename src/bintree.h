@@ -7,6 +7,7 @@ struct node {
         struct node *left, *right;
 };
 
+void chcur_node(struct node *r, struct node **pcur, int n);
 void add_node(struct node **r, struct node **pcur, int n);
 void dsp_node(struct node *r);
 void dsp_cur_node(struct node **pcur);
