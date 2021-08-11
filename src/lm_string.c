@@ -25,7 +25,7 @@ int a_to_i(const char *s)
                 sign = 1;
                 s++;
         }
-        for (; *s && *s != ' ' && *s != '\n' && *s != EOF; s++)
+        for (; *s && *s != ' ' && *s != '\n'; s++)
                 i = i * 10 + *s - '0';
         return sign ? i * -1 : i;
 }
