@@ -24,6 +24,7 @@ int parse_val(enum command cmd, enum mode m)
         default:
                 break;
         }
+        fflush(stdout);
         switch (cmd) {
         case cmd_chcur:
         case cmd_add:

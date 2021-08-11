@@ -7,6 +7,7 @@ enum mode parse_mode()
         enum mode m = mode_single;
         int c;
         printf("mode [S/d/b]: ");
+        fflush(stdout);
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
                 case 'S': case 's': m = mode_single;  break;

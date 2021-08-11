@@ -11,6 +11,7 @@ enum command parse_cmd()
         enum command cmd = cmd_nothing;
         int c;
         printf("(lm) %% ");
+        fflush(stdout);
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
                 case 'H': case 'h': cmd = cmd_help;     break;
