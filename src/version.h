@@ -6,7 +6,7 @@
 #define PROGRAM_EMAIL "17seannnn@gmail.com"
 #define PROGRAM_PAGE "https://github.com/17sean/list-manager"
 
-#define VERSION "1.16b"
+#define VERSION "1.17"
 
 #define AUTHOR "Sergey Nikonov"
 #define AUTHOR_NICKNAME "17sean"
