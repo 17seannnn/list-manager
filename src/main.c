@@ -29,7 +29,7 @@ int main(int argc, char **argv)
                         exit_status = ERR_EOF;
                         goto quit;
                 }
-                val = parse_val(cmd);
+                val = parse_val(cmd, m);
                 res = handle_cmd(cmd, val, &p, &m);
                 if (!res) {
                         break;

@@ -2,14 +2,32 @@
 
 #include "value.h"
 
-int parse_val(enum command cmd)
+int parse_val(enum command cmd, enum mode m)
 {
         int val = 0, sign = 0, c;
         switch (cmd) {
         case cmd_chcur:
+                switch (m) {
+                case mode_single:
+                case mode_doubly:
+                        printf("val [p/n]: ");
+                        break;
+                case mode_bintree:
+                        printf("val [p/l/r]: ");
+                        break;
+                }
+                break;
         case cmd_add:
         case cmd_search:
                 printf("val: ");
+                break;
+        default:
+                break;
+        }
+        switch (cmd) {
+        case cmd_chcur:
+        case cmd_add:
+        case cmd_search:
                 while ((c = getchar()) != '\n' && c != EOF) {
                         switch (c) {
                         case '-':

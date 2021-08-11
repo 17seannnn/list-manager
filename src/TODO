@@ -1,7 +1,5 @@
                                      TODO:
 
-        Print [example values] when want to get special value like L/R/P/N
-
         Delete all comparison of -1 with expression of type const 'char',
                                  check why it broken in termux and ish
         Do fflush(stdout); every printf
