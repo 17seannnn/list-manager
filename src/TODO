@@ -1,7 +1,6 @@
                                      TODO:
 
-        Delete all comparison of -1 with expression of type const 'char',
-                                 check why it broken in termux and ish
+        Check why while i use bintree add on termux or ish program crashes
 
         Patch
 

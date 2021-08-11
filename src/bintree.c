@@ -72,10 +72,8 @@ void dsp_cur_node(struct node **pcur)
         (*pcur)->exist = 0;
         if ((*pcur)->right)
                 *pcur = (*pcur)->right;
-        else if ((*pcur)->left)
-                *pcur = (*pcur)->left;
         else
-                *pcur = NULL;
+                *pcur = (*pcur)->left;
 }
 
 void show_node(struct node *r, struct node *cur)
