@@ -1,16 +1,2 @@
                                      TODO:
-
-        Big code refactor *
-
-Later:
-
-        Makefile
-
- -------------------------------------------------------------------------------
-|                             Maybe never to do:
-|
-|        Add in current prev or next pointer for single&doubly-linked lists,
-|        add current also change current pointer
-|
-|        Improve chcur and dsp_cur funcs: remove workaround from chcur_single
- -------------------------------------------------------------------------------
+Nothing there.. Maybe later?
