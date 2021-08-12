@@ -41,12 +41,13 @@ void dsp_cur_single(struct single_item **pfirst, struct single_item **pcur)
 {
         struct single_item *tmp = *pcur;
         int res;
-        if (!*pcur)
+        if (!*first || !*pcur)
                 return;
         if ((*pcur)->next) {
                 chcur_single(*pfirst, pcur, 'n');
         } else {
                 res = chcur_single(*pfirst, pcur, 'p');
+                /* instead of res compare tmp and *pcur */
                 if (!res)
                         *pcur = NULL;
         }
