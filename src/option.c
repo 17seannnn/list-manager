@@ -9,12 +9,12 @@ int handle_opt(char **argv)
 {
         argv++;
         for (; *argv; argv++)
-                if (str_equal(*argv, OPTION_HELP_SHORT) ||
-                    str_equal(*argv, OPTION_HELP_LONG)) {
+                if (str_eql(*argv, OPTION_HELP_SHORT) ||
+                    str_eql(*argv, OPTION_HELP_LONG)) {
                         help_opt();
                         return 0;
-                } else if (str_equal(*argv, OPTION_VERSION_LONG) ||
-                           str_equal(*argv, OPTION_VERSION_SHORT)) {
+                } else if (str_eql(*argv, OPTION_VERSION_LONG) ||
+                           str_eql(*argv, OPTION_VERSION_SHORT)) {
                         version_opt();
                         return 0;
                 }

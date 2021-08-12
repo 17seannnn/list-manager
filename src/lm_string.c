@@ -2,7 +2,7 @@
 
 #include "lm_string.h"
 
-int str_equal(const char *c1, const char *c2)
+int str_eql(const char *c1, const char *c2)
 {
         for (; *c1 || *c2; c1++, c2++)
                 if (*c1 != *c2)
