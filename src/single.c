@@ -12,10 +12,10 @@ void chcur_single(struct single_item *first, struct single_item **pcur, int n)
         case 'P': case 'p':
                 if (first == *pcur)
                         return;
-                /* TODO add `first &&` in condition */
-                while(first->next != *pcur)
+                while(first && first->next != *pcur)
                         first = first->next;
-                *pcur = first;
+                if (first)
+                        *pcur = first;
                 break;
         case 'N': case 'n':
                 if ((*pcur)->next)
