@@ -4,14 +4,15 @@
 
 #include "single.h"
 
-int chcur_single(struct single_item *first, struct single_item **pcur, int n)
+void chcur_single(struct single_item *first, struct single_item **pcur, int n)
 {
         if (!first || !*pcur)
-                return 0;
+                return;
         switch (n) {
         case 'P': case 'p':
                 if (first == *pcur)
-                        return 0;
+                        return;
+                /* TODO add `first &&` in condition */
                 while(first->next != *pcur)
                         first = first->next;
                 *pcur = first;
@@ -19,10 +20,7 @@ int chcur_single(struct single_item *first, struct single_item **pcur, int n)
         case 'N': case 'n':
                 if ((*pcur)->next)
                         *pcur = (*pcur)->next;
-                else
-                        return 0;
         }
-        return 1;
 }
 
 void add_single(struct single_item **pfirst, struct single_item **pcur, int n)
@@ -40,15 +38,13 @@ MAKE_DISPOSE_LIST_FUNCTION(single)
 void dsp_cur_single(struct single_item **pfirst, struct single_item **pcur)
 {
         struct single_item *tmp = *pcur;
-        int res;
-        if (!*first || !*pcur)
+        if (!*pfirst || !*pcur)
                 return;
         if ((*pcur)->next) {
                 chcur_single(*pfirst, pcur, 'n');
         } else {
-                res = chcur_single(*pfirst, pcur, 'p');
-                /* instead of res compare tmp and *pcur */
-                if (!res)
+                chcur_single(*pfirst, pcur, 'p');
+                if (*pcur == tmp) 
                         *pcur = NULL;
         }
         while (*pfirst != tmp)
