@@ -10,6 +10,8 @@ void chcur_node(struct node *r, struct node **pcur, int n)
         switch (n) {
         case 'P':
         case 'p':
+                if (r == *pcur)
+                        return;
                 while (r && (r->left != *pcur && r->right != *pcur))
                         if ((*pcur)->val < r->val)
                                 r = r->left;
@@ -20,11 +22,13 @@ void chcur_node(struct node *r, struct node **pcur, int n)
                 break;
         case 'L':
         case 'l':
-                *pcur = (*pcur)->left;
+                if ((*pcur)->left)
+                        *pcur = (*pcur)->left;
                 break;
         case 'R':
         case 'r':
-                *pcur = (*pcur)->right;
+                if ((*pcur)->right)
+                        *pcur = (*pcur)->right;
                 break;
         default:
                 break;
