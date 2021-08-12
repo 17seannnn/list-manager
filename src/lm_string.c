@@ -2,10 +2,10 @@
 
 #include "lm_string.h"
 
-int str_equal(const char *s1, const char *s2)
+int str_equal(const char *c1, const char *c2)
 {
-        for (; *s1 || *s2; s1++, s2++)
-                if (*s1 != *s2)
+        for (; *c1 || *c2; c1++, c2++)
+                if (*c1 != *c2)
                         return 0;
         return 1;
 }
@@ -20,12 +20,10 @@ int str_len(const char *s)
 
 int a_to_i(const char *s)
 {
-        int i = 0, sign = 0;
-        if (*s == '-') {
-                sign = 1;
-                s++;
-        }
+        int i = 0;
+        if (*s == '-')
+                return -a_to_i(s+1);
         for (; *s && *s != ' ' && *s != '\n'; s++)
                 i = i * 10 + *s - '0';
-        return sign ? i * -1 : i;
+        return i;
 }
