@@ -50,5 +50,5 @@ int parse_val(enum command cmd, enum mode m)
         default:
                 break;
         }
-        return sign ? val * -1 : val;
+        return sign ? -val : val;
 }
