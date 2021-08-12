@@ -34,12 +34,13 @@
                              struct MODE ## _item **pcur, \
                              int n) \
         { \
-                for (; first; first = first->next) \
+                for (; first; first = first->next) { \
                         if (n == first->data) { \
                                 printf("Found.\n"); \
                                 *pcur = first; \
                                 return; \
                         } \
+                } \
                 printf("Not found.\n"); \
         }
 

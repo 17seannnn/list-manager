@@ -8,7 +8,7 @@
 int handle_opt(char **argv)
 {
         argv++;
-        for (; *argv; argv++)
+        for (; *argv; argv++) {
                 if (str_eql(*argv, OPTION_HELP_SHORT) ||
                     str_eql(*argv, OPTION_HELP_LONG)) {
                         help_opt();
@@ -18,5 +18,6 @@ int handle_opt(char **argv)
                         version_opt();
                         return 0;
                 }
+        }
         return 1;
 }
