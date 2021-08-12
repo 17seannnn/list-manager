@@ -24,6 +24,7 @@ enum command parse_cmd()
                 case 'S':           cmd = cmd_show;     break;
                 case 's':           cmd = cmd_show_cur; break;
                 case '?':           cmd = cmd_search;   break;
+                default:                                break;
                 }
         }
         if (c == EOF) {
@@ -57,8 +58,10 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case mode_doubly:
                         chcur_doubly(&p->d_cur, val);
                         break;
-                default:
+                case mode_bintree:
                         chcur_node(p->root, &p->b_cur, val);
+                        break;
+                default:
                         break;
                 }
                 break;
@@ -72,6 +75,8 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         break;
                 case mode_bintree:
                         add_node(&p->root, &p->b_cur, val);
+                        break;
+                default:
                         break;
                 }
                 break;
@@ -93,6 +98,8 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         p->root = NULL;
                         p->b_cur = NULL;
                         break;
+                default:
+                        break;
                 }
                 break;
         case cmd_dsp_cur:
@@ -103,8 +110,10 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case mode_doubly:
                         dsp_cur_doubly(&p->d_first, &p->d_last, &p->d_cur);
                         break;
-                default:
+                case mode_bintree:
                         dsp_cur_node(&p->b_cur);
+                        break;
+                default:
                         break;
                 }
                 break;
@@ -119,6 +128,8 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case mode_bintree:
                         show_node(p->root, p->b_cur);
                         break;
+                default:
+                        break;
                 }
                 break;
         case cmd_show_cur:
@@ -131,6 +142,8 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                         break;
                 case mode_bintree:
                         show_cur_node(p->b_cur);
+                        break;
+                default:
                         break;
                 }
                 break;
@@ -145,7 +158,11 @@ int handle_cmd(enum command cmd, int val, struct pointer *p, enum mode *m)
                 case mode_bintree:
                         search_node(p->root, &p->b_cur, val);
                         break;
+                default:
+                        break;
                 }
+                break;
+        default:
                 break;
         }
         return 1;

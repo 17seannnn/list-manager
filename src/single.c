@@ -20,6 +20,9 @@ void chcur_single(struct single_item *first, struct single_item **pcur, int n)
         case 'N': case 'n':
                 if ((*pcur)->next)
                         *pcur = (*pcur)->next;
+                break;
+        default:
+                break;
         }
 }
 

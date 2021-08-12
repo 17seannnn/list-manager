@@ -17,6 +17,8 @@ void chcur_doubly(struct doubly_item **pcur, int n)
                 if ((*pcur)->next)
                         *pcur = (*pcur)->next;
                 break;
+        default:
+                break;
         }
 }
 

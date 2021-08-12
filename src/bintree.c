@@ -26,6 +26,8 @@ void chcur_node(struct node *r, struct node **pcur, int n)
         case 'r':
                 *pcur = (*pcur)->right;
                 break;
+        default:
+                break;
         }
 }
 

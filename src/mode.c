@@ -13,6 +13,7 @@ enum mode parse_mode()
                 case 'S': case 's': m = mode_single;  break;
                 case 'D': case 'd': m = mode_doubly;  break;
                 case 'B': case 'b': m = mode_bintree; break;
+                default:                              break;
                 }
         }
         if (c == EOF) {

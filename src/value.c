@@ -15,6 +15,8 @@ int parse_val(enum command cmd, enum mode m)
                 case mode_bintree:
                         printf("val [p/l/r]: ");
                         break;
+                default:
+                        break;
                 }
                 break;
         case cmd_add:
@@ -43,6 +45,8 @@ int parse_val(enum command cmd, enum mode m)
                         case 'L': case 'l':
                         case 'R': case 'r':
                                 val = c;
+                                break;
+                        default:
                                 break;
                         }
                 }
