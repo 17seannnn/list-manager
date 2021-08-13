@@ -38,7 +38,7 @@ void chcur_node(struct node *r, struct node **pcur, int n)
 void add_node(struct node **r, struct node **pcur, int n)
 {
         if (!*r) {
-                *r = malloc(sizeof(*r));
+                *r = malloc(sizeof(**r));
                 (*r)->val = n;
                 (*r)->exist = 1;
                 (*r)->left = NULL;
