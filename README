@@ -28,4 +28,4 @@ Commands:
 [Q/q] - quit
 
 Install
-Use build.sh in src/ directory
+./build.sh
