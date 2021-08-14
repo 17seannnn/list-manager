@@ -20,7 +20,7 @@ If you find bugs: %s\n\
 
 void help_short()
 {
-        printf(_("Invalid command, try 'h' for help\n"));
+        printf(_("Invalid command, try 'h' for help.\n"));
 }
 
 void help_full()
