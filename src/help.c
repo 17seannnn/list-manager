@@ -27,17 +27,18 @@ void help_full()
 {
         printf(_("\
 Here 3 modes:\n\
-        [S/s]ingle-linked list\n\
-        [D/d]oubly-linked list\n\
-        [B/b]inary tree\n\
+        [S/s] - single-linked list\n\
+        [D/d] - doubly-linked list\n\
+        [B/b] - binary tree\n\
 You can manage dynamic data structures by these commands:\n\
         [M/m] - change mode\n\
         [C/c] - change current pointer\n\
-        [A/a] - add item\n\
-        [D]   - dispose all\n\
-        [d]   - dispose current\n\
-        [S]   - show all\n\
-        [s]   - show current\n\
+        [A/a] - add item\n"));
+        printf(_("\
+        [D]   - dispose all items\n\
+        [d]   - dispose current item\n\
+        [S]   - show all items\n\
+        [s]   - show current item\n\
         [?]   - search item\n\
 Also these commands can be useful too:\n\
         [H/h] - this help\n\
