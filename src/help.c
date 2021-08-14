@@ -13,8 +13,8 @@ Options:\n\
         -h, --help      this help\n\
         -v, --version   show version\n\
 \n\
-If you find bugs: %s\n\
-%s home page <%s>\n"),
+Report bugs to: %s\n\
+%s home page: <%s>\n"),
                PROGRAM_NAME, PROGRAM_EMAIL, PROGRAM_NAME, PROGRAM_PAGE);
 }
 
