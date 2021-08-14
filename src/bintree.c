@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "gtmd.h"
 
 #include "bintree.h"
 
@@ -88,7 +89,7 @@ void show_node(struct node *r, struct node *cur)
                 return;
         show_node(r->left, cur);
         if (r->exist)
-                printf("%d %c\n", r->val, r == cur ? '*' : 0);
+                printf(_("%d %c\n"), r->val, r == cur ? '*' : 0);
         show_node(r->right, cur);
 }
 
@@ -96,17 +97,17 @@ void show_cur_node(struct node *b_cur)
 {
         if (!b_cur || !b_cur->exist)
                 return;
-        printf("%d *\n", b_cur->val);
+        printf(_("%d *\n"), b_cur->val);
 }
 
 void search_node(struct node *r, struct node **pcur, int n)
 {
         if (!r) {
-                printf("Not found.\n");
+                printf(_("Not found.\n"));
                 return;
         }
         if (r->val == n && r->exist) {
-                printf("Found.\n");
+                printf(_("Found.\n"));
                 *pcur = r;
                 return;
         }

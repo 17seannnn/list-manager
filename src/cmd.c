@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "gtmd.h"
 #include "help.h"
 #include "single.h"
 #include "doubly.h"
@@ -10,7 +11,7 @@ enum command parse_cmd()
 {
         enum command cmd = cmd_nothing;
         int c;
-        printf("(lm) %% ");
+        printf(N_("(lm) %% "));
         fflush(stdout);
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
@@ -29,7 +30,7 @@ enum command parse_cmd()
         }
         if (c == EOF) {
                 fprintf(stderr,
-                        "error: return expected but end of file found\n");
+                        _("error: return expected but end of file found\n"));
                 return -1;
         }
         return cmd;

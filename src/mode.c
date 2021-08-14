@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "gtmd.h"
 
 #include "mode.h"
 
@@ -6,7 +7,7 @@ enum mode parse_mode()
 {
         enum mode m = mode_single;
         int c;
-        printf("mode [S/d/b]: ");
+        printf(_("mode [S/d/b]: "));
         fflush(stdout);
         while ((c = getchar()) != '\n' && c != EOF) {
                 switch (c) {
@@ -18,7 +19,7 @@ enum mode parse_mode()
         }
         if (c == EOF) {
                 fprintf(stderr,
-                        "error: return expected but end of file found\n");
+                        _("error: return expected but end of file found\n"));
                 return -1;
         }
         return m;

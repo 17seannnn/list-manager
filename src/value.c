@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "gtmd.h"
 
 #include "value.h"
 
@@ -10,10 +11,10 @@ int parse_val(enum command cmd, enum mode m)
                 switch (m) {
                 case mode_single:
                 case mode_doubly:
-                        printf("value [p/n]: ");
+                        printf(_("value [%c/%c]: "), 'p', 'n');
                         break;
                 case mode_bintree:
-                        printf("value [p/l/r]: ");
+                        printf(_("value [%c/%c/%c]: "), 'p', 'l', 'r');
                         break;
                 default:
                         break;
@@ -21,7 +22,7 @@ int parse_val(enum command cmd, enum mode m)
                 break;
         case cmd_add:
         case cmd_search:
-                printf("value: ");
+                printf(_("value: "));
                 break;
         default:
                 break;
