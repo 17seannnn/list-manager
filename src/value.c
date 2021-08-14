@@ -10,10 +10,10 @@ int parse_val(enum command cmd, enum mode m)
                 switch (m) {
                 case mode_single:
                 case mode_doubly:
-                        printf("val [p/n]: ");
+                        printf("value [p/n]: ");
                         break;
                 case mode_bintree:
-                        printf("val [p/l/r]: ");
+                        printf("value [p/l/r]: ");
                         break;
                 default:
                         break;
@@ -21,7 +21,7 @@ int parse_val(enum command cmd, enum mode m)
                 break;
         case cmd_add:
         case cmd_search:
-                printf("val: ");
+                printf("value: ");
                 break;
         default:
                 break;
