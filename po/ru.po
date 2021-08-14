@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-14 21:01+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bintree.c:92
+#, c-format
+msgid "%d %c\n"
+msgstr "%d %c\n"
+
+#: bintree.c:100
+#, c-format
+msgid "%d *\n"
+msgstr "%d *\n"
+
+#: bintree.c:106
+#, c-format
+msgid "Not found.\n"
+msgstr "Не найдено.\n"
+
+#: bintree.c:110
+#, c-format
+msgid "Found.\n"
+msgstr "Найдено.\n"
+
+#: cmd.c:33 mode.c:22
+#, c-format
+msgid "error: return expected but end of file found\n"
+msgstr "ошибка: ожидалось возвращение, но был найден конец файла\n"
+
+#: help.c:9
+#, c-format
+msgid ""
+"Usage: %s [OPTION]\n"
+"\n"
+"Options:\n"
+"        -h, --help      this help\n"
+"        -v, --version   show version\n"
+"\n"
+"Report bugs to: %s\n"
+"%s home page: <%s>\n"
+msgstr ""
+"Использование: %s [OPTION]\n"
+"\n"
+"Опции:\n"
+"        -h, --help      эта помощь\n"
+"        -v, --version   показать версию\n"
+"\n"
+"Сообщить о баге: %s\n"
+"Домашняя страница %s: <%s>\n"
+
+#: help.c:23
+#, fuzzy, c-format
+msgid "Invalid command, try 'h' for help.\n"
+msgstr "Неверная команда, попробуйте 'h' для помощи.\n"
+
+#: help.c:28
+#, c-format
+msgid ""
+"Here 3 modes:\n"
+"        [S/s] - single-linked list\n"
+"        [D/d] - doubly-linked list\n"
+"        [B/b] - binary tree\n"
+"You can manage dynamic data structures by these commands:\n"
+"        [M/m] - change mode\n"
+"        [C/c] - change current pointer\n"
+"        [A/a] - add item\n"
+msgstr ""
+"Здесь 3 режима:\n"
+"        [S/s] односвязный список\n"
+"        [D/d] двусвязный список\n"
+"        [B/b] бинарное дерево\n"
+"Вы можете управлять динамическими структурами данных с помощью этих команд:\n"
+"        [M/m] - изменить режим\n"
+"        [C/c] - изменить текущий указатель\n"
+"        [A/a] - добавить предмет\n"
+
+#: help.c:37
+#, c-format
+msgid ""
+"        [D]   - dispose all items\n"
+"        [d]   - dispose current item\n"
+"        [S]   - show all items\n"
+"        [s]   - show current item\n"
+"        [?]   - search item\n"
+"Also these commands can be useful too:\n"
+"        [H/h] - this help\n"
+"        [Q/q] - quit\n"
+msgstr ""
+"        [D]   - уничтожить все\n"
+"        [d]   - уничтожить текущий предмет\n"
+"        [S]   - показать все\n"
+"        [s]   - показать текущий предмет\n"
+"        [?]   - искать предмет\n"
+"Также эти команды могут быть полезны:\n"
+"        [H/h] - эта помощь\n"
+"        [Q/q] - выйти\n"
+
+#: mode.c:10
+#, c-format
+msgid "mode [S/d/b]: "
+msgstr "режим [S/d/b]: "
+
+#: value.c:14
+#, c-format
+msgid "value [%c/%c]: "
+msgstr "значение [%c/%c]: "
+
+#: value.c:17
+#, c-format
+msgid "value [%c/%c/%c]: "
+msgstr "значение [%c/%c/%c]: "
+
+#: value.c:25
+#, c-format
+msgid "value: "
+msgstr "значение: "
+
+#: version.c:8
+#, c-format
+msgid ""
+"%s (%s) %s\n"
+"Copyright (c) %s %s (%s)\n"
+"License %s: <%s>\n"
+"\n"
+"Written by %s (%s).\n"
+"Github: <%s>\n"
+msgstr ""
+"%s (%s) %s\n"
+"Авторское право (c) %s %s (%s)\n"
+"Лицензия %s: <%s>\n"
+"\n"
+"Под авторством %s (%s).\n"
+"Github: <%s>\n"
