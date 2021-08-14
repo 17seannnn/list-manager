@@ -1,17 +1,22 @@
 TODO:
 
-translate program
-add INPUTFILE for xgettext
-add .gitignore
+[Feature]
+improve build.sh:
+        update translation files,
+        build mo and move to locale dir
+        bin to PATH dirs
 
+[README]
 in README ./build.sh -> shell build.sh
-improve build.sh: update translation files
+add section about translation in README
 
+[Patch]
 PROGRAM -> PACKAGE
 remove my email from this package
 -v -> -V
 if !res then goto quit in main.c
 
+[Refactor]
 simplify headers name
 move error`s messages in error.h and print them in main.c
 add comments in all files
