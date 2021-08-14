@@ -28,7 +28,8 @@ enum command parse_cmd()
                 }
         }
         if (c == EOF) {
-                fprintf(stderr, "error: used EOF instead of RETURN\n");
+                fprintf(stderr,
+                        "error: return expected but end of file found\n");
                 return -1;
         }
         return cmd;
