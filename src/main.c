@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <locale.h>
+#include <libintl.h>
+#include "config.h"
+#include "gtmd.h"
 #include "option.h"
 #include "pointer.h"
 #include "mode.h"
@@ -15,6 +19,10 @@ int main(int argc, char **argv)
         enum command cmd;
         int val;
         int res;
+        setlocale(LC_CTYPE, "");
+        setlocale(LC_MESSAGES, "");
+        bindtextdomain(PACKAGE, LOCALEDIR);
+        textdomain(PACKAGE);
         res = handle_opt(argv);
         if (!res)
                 goto quit;
