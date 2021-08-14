@@ -6,6 +6,9 @@
 #define PROGRAM_EMAIL "17seannnn@gmail.com"
 #define PROGRAM_PAGE "https://github.com/17sean/list-manager"
 
+#define LICENSE "MIT"
+#define LICENSE_PAGE "https://opensource.org/licenses/MIT"
+
 #define VERSION "1.18d"
 
 #define AUTHOR "Sergey Nikonov"
