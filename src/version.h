@@ -6,6 +6,8 @@
 #define PROGRAM_EMAIL "17seannnn@gmail.com"
 #define PROGRAM_PAGE "https://github.com/17sean/list-manager"
 
+#define COPYRIGHT_YEAR "2021"
+
 #define LICENSE "MIT"
 #define LICENSE_PAGE "https://opensource.org/licenses/MIT"
 
