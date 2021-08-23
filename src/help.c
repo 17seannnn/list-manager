@@ -13,9 +13,8 @@ Options:\n\
         -h, --help      this help\n\
         -V, --version   show version\n\
 \n\
-Report bugs to: %s\n\
-%s home page: <%s>\n"),
-               PACKAGE_NAME, PACKAGE_EMAIL, PACKAGE_NAME, PACKAGE_PAGE);
+Report bugs to & %s home page: <%s>\n"),
+               PACKAGE_NAME, PACKAGE_NAME, PACKAGE_PAGE);
 }
 
 void help_short()

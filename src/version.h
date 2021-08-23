@@ -3,7 +3,6 @@
 
 #define PACKAGE_NAME "lm"
 #define PACKAGE_NAME_LONG "list manager"
-#define PACKAGE_EMAIL "17seannnn@gmail.com"
 #define PACKAGE_PAGE "https://github.com/17sean/list-manager"
 
 #define COPYRIGHT_YEAR "2021"
