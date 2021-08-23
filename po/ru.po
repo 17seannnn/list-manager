@@ -1,44 +1,41 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Russian translation for lm package.
+# Copyright (C) 2021 Sergey Nikonov (17sean)
+# This file is distributed under the same license as the lm package.
+# Sergey Nikonov, 2021.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 14:08+0300\n"
+"POT-Creation-Date: 2021-08-23 18:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Sergey Nikonov\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/bintree.c:92 src/macrofunc_list.h:22
+#: src/bintree.c:92 src/listmf.h:22
 #, c-format
 msgid "%d %c\n"
 msgstr "%d %c\n"
 
-#: src/bintree.c:100 src/macrofunc_list.h:31
+#: src/bintree.c:100 src/listmf.h:31
 #, c-format
 msgid "%d *\n"
 msgstr "%d *\n"
 
-#: src/bintree.c:106 src/macrofunc_list.h:46
+#: src/bintree.c:106 src/listmf.h:46
 #, c-format
 msgid "Not found.\n"
 msgstr "Не найдено.\n"
 
-#: src/bintree.c:110 src/macrofunc_list.h:41
+#: src/bintree.c:110 src/listmf.h:41
 #, c-format
 msgid "Found.\n"
 msgstr "Найдено.\n"
 
-#: src/cmd.c:33 src/mode.c:22
-#, c-format
+#: src/error.h:6
 msgid "error: return expected but end of file found\n"
 msgstr "ошибка: ожидалось возвращение, но был найден конец файла\n"
 
@@ -49,26 +46,24 @@ msgid ""
 "\n"
 "Options:\n"
 "        -h, --help      this help\n"
-"        -v, --version   show version\n"
+"        -V, --version   show version\n"
 "\n"
-"Report bugs to: %s\n"
-"%s home page: <%s>\n"
+"Report bugs to & %s home page: <%s>\n"
 msgstr ""
-"Использование: %s [OPTION]\n"
+"Использование: %s [ОПЦИЯ]\n"
 "\n"
 "Опции:\n"
 "        -h, --help      эта помощь\n"
-"        -v, --version   показать версию\n"
+"        -V, --version   показать версию\n"
 "\n"
-"Сообщить о баге: %s\n"
-"Домашняя страница %s: <%s>\n"
+"Сообщить о баге & домашняя страница %s: <%s>\n"
 
-#: src/help.c:23
+#: src/help.c:22
 #, c-format
 msgid "Invalid command, try 'h' for help.\n"
 msgstr "Неверная комманда, попробуйте 'h' для помощи.\n"
 
-#: src/help.c:28
+#: src/help.c:27
 #, c-format
 msgid ""
 "Here 3 modes:\n"
@@ -89,7 +84,7 @@ msgstr ""
 "        [C/c] - изменить текущий указатель\n"
 "        [A/a] - добавить предмет\n"
 
-#: src/help.c:37
+#: src/help.c:36
 #, c-format
 msgid ""
 "        [D]   - dispose all items\n"
@@ -110,7 +105,7 @@ msgstr ""
 "        [H/h] - эта помощь\n"
 "        [Q/q] - выйти\n"
 
-#: src/mode.c:10
+#: src/mode.c:11
 #, c-format
 msgid "mode [S/d/b]: "
 msgstr "режим [S/d/b]: "
