@@ -1,7 +1,7 @@
 src/bintree.c
 src/cmd.c
 src/help.c
-src/macrofunc_list.h
+src/listmf.h
 src/mode.c
 src/value.c
 src/version.c
