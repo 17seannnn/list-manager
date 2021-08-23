@@ -29,3 +29,7 @@ Commands:
 
 Install
 ./build.sh
+
+Translation
+buildpot.sh        Build POT file, get files from po/POTFILES.in
+buildmo.sh         Build mo files and move them in locale dir
