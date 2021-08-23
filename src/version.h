@@ -17,7 +17,7 @@
 #define AUTHOR_NICKNAME "17sean"
 #define AUTHOR_PAGE "https://github.com/17sean"
 
-#define OPTION_VERSION_SHORT "-v"
+#define OPTION_VERSION_SHORT "-V"
 #define OPTION_VERSION_LONG "--version"
 
 void version_opt();

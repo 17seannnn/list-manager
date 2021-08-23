@@ -11,7 +11,7 @@ Usage: %s [OPTION]\n\
 \n\
 Options:\n\
         -h, --help      this help\n\
-        -v, --version   show version\n\
+        -V, --version   show version\n\
 \n\
 Report bugs to: %s\n\
 %s home page: <%s>\n"),
