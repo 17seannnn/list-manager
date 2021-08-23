@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "lm_string.h"
+#include "lmstring.h"
 
 int str_eql(const char *c1, const char *c2)
 {

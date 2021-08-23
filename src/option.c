@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "lm_string.h"
+#include "lmstring.h"
 #include "help.h"
 #include "version.h"
 

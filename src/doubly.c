@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "macrofunc_list.h"
+#include "listmf.h"
 
 #include "doubly.h"
 
