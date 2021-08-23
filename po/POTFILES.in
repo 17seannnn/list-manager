@@ -1,5 +1,6 @@
 src/bintree.c
 src/cmd.c
+src/error.h
 src/help.c
 src/listmf.h
 src/mode.c
