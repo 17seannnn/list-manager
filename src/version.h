@@ -1,10 +1,10 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#define PROGRAM_NAME "lm"
-#define PROGRAM_NAME_LONG "list manager"
-#define PROGRAM_EMAIL "17seannnn@gmail.com"
-#define PROGRAM_PAGE "https://github.com/17sean/list-manager"
+#define PACKAGE_NAME "lm"
+#define PACKAGE_NAME_LONG "list manager"
+#define PACKAGE_EMAIL "17seannnn@gmail.com"
+#define PACKAGE_PAGE "https://github.com/17sean/list-manager"
 
 #define COPYRIGHT_YEAR "2021"
 

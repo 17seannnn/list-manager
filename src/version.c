@@ -12,7 +12,7 @@ License %s: <%s>\n\
 \n\
 Written by %s (%s).\n\
 Github: <%s>\n"),
-               PROGRAM_NAME, PROGRAM_NAME_LONG, VERSION,
+               PACKAGE_NAME, PACKAGE_NAME_LONG, VERSION,
                COPYRIGHT_YEAR, AUTHOR, AUTHOR_NICKNAME,
                LICENSE, LICENSE_PAGE,
                AUTHOR, AUTHOR_NICKNAME, AUTHOR_PAGE);
