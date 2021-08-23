@@ -40,7 +40,7 @@ int main(int argc, char **argv)
                 val = parse_val(cmd, m);
                 res = handle_cmd(cmd, val, &p, &m);
                 if (!res) {
-                        break;
+                        goto quit;
                 } else if (res == -1) {
                         exit_status = ERR_EOF;
                         goto quit;
