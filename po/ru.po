@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-14 21:01+0300\n"
+"POT-Creation-Date: 2021-08-23 14:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bintree.c:92
+#: src/bintree.c:92 src/macrofunc_list.h:22
 #, c-format
 msgid "%d %c\n"
 msgstr "%d %c\n"
 
-#: bintree.c:100
+#: src/bintree.c:100 src/macrofunc_list.h:31
 #, c-format
 msgid "%d *\n"
 msgstr "%d *\n"
 
-#: bintree.c:106
+#: src/bintree.c:106 src/macrofunc_list.h:46
 #, c-format
 msgid "Not found.\n"
 msgstr "Не найдено.\n"
 
-#: bintree.c:110
+#: src/bintree.c:110 src/macrofunc_list.h:41
 #, c-format
 msgid "Found.\n"
 msgstr "Найдено.\n"
 
-#: cmd.c:33 mode.c:22
+#: src/cmd.c:33 src/mode.c:22
 #, c-format
 msgid "error: return expected but end of file found\n"
 msgstr "ошибка: ожидалось возвращение, но был найден конец файла\n"
 
-#: help.c:9
+#: src/help.c:9
 #, c-format
 msgid ""
 "Usage: %s [OPTION]\n"
@@ -63,12 +63,12 @@ msgstr ""
 "Сообщить о баге: %s\n"
 "Домашняя страница %s: <%s>\n"
 
-#: help.c:23
-#, fuzzy, c-format
+#: src/help.c:23
+#, c-format
 msgid "Invalid command, try 'h' for help.\n"
-msgstr "Неверная команда, попробуйте 'h' для помощи.\n"
+msgstr "Неверная комманда, попробуйте 'h' для помощи.\n"
 
-#: help.c:28
+#: src/help.c:28
 #, c-format
 msgid ""
 "Here 3 modes:\n"
@@ -89,7 +89,7 @@ msgstr ""
 "        [C/c] - изменить текущий указатель\n"
 "        [A/a] - добавить предмет\n"
 
-#: help.c:37
+#: src/help.c:37
 #, c-format
 msgid ""
 "        [D]   - dispose all items\n"
@@ -110,27 +110,27 @@ msgstr ""
 "        [H/h] - эта помощь\n"
 "        [Q/q] - выйти\n"
 
-#: mode.c:10
+#: src/mode.c:10
 #, c-format
 msgid "mode [S/d/b]: "
 msgstr "режим [S/d/b]: "
 
-#: value.c:14
+#: src/value.c:14
 #, c-format
 msgid "value [%c/%c]: "
 msgstr "значение [%c/%c]: "
 
-#: value.c:17
+#: src/value.c:17
 #, c-format
 msgid "value [%c/%c/%c]: "
 msgstr "значение [%c/%c/%c]: "
 
-#: value.c:25
+#: src/value.c:25
 #, c-format
 msgid "value: "
 msgstr "значение: "
 
-#: version.c:8
+#: src/version.c:8
 #, c-format
 msgid ""
 "%s (%s) %s\n"
