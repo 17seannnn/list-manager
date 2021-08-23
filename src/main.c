@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include <libintl.h>
+#include "error.h"
 #include "config.h"
 #include "gtmd.h"
 #include "option.h"
@@ -9,7 +10,6 @@
 #include "cmd.h"
 #include "value.h"
 #include "dsp_all.h"
-#include "error.h"
 
 int main(int argc, char **argv)
 {

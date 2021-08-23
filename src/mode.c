@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "error.h"
 #include "gtmd.h"
 
 #include "mode.h"
@@ -18,8 +19,7 @@ enum mode parse_mode()
                 }
         }
         if (c == EOF) {
-                fprintf(stderr,
-                        _("error: return expected but end of file found\n"));
+                printerr(ERR_EOF);
                 return -1;
         }
         return m;

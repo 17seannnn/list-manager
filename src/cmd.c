@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "error.h"
 #include "gtmd.h"
 #include "help.h"
 #include "single.h"
@@ -29,8 +30,7 @@ enum command parse_cmd()
                 }
         }
         if (c == EOF) {
-                fprintf(stderr,
-                        _("error: return expected but end of file found\n"));
+                printerr(ERR_EOF);
                 return -1;
         }
         return cmd;
