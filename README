@@ -31,5 +31,5 @@ Install
 ./build.sh
 
 Translation
-buildpot.sh        Build POT file, get files from po/POTFILES.in
-buildmo.sh         Build mo files and move them in locale dir
+./build.sh pot     generate .pot file in po/, get files from po/POTFILES.in
+./build.sh mo      compile and move .mo files from po/ to locale dirs
