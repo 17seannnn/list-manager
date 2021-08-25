@@ -1,5 +1,5 @@
-#ifndef MACROFUNC_LIST_H
-#define MACROFUNC_LIST_H
+#ifndef LISTMF_H
+#define LISTMF_H
 
 #include "gtmd.h"
 

@@ -1,5 +1,5 @@
-#ifndef LM_STRING_H
-#define LM_STRING_H
+#ifndef LMSTRING_H
+#define LMSTRING_H
 
 int str_eql(const char *c1, const char *c2);
 int str_len(const char *s);
