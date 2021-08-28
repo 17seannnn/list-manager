@@ -1,12 +1,7 @@
 CC=gcc
 
 case $1 in
-        pot) xgettext --keyword="_" --files-from="po/POTFILES.in" -o po/lm.pot;;
-        mo)
-                cd po/;
-                mkdir -p /usr/share/locale/ru/LC_MESSAGES;
-                msgfmt ru.po -o /usr/share/locale/ru/LC_MESSAGES/lm.mo;;
-        '')
+        install)
                 cd src/;
                 $CC -ansi -pedantic -Wall -Og -g -c error.c option.c mode.c \
                     cmd.c help.c single.c doubly.c bintree.c \
@@ -18,6 +13,11 @@ case $1 in
                 cd ../po/;
                 mkdir -p /usr/share/locale/ru/LC_MESSAGES;
                 msgfmt ru.po -o /usr/share/locale/ru/LC_MESSAGES/lm.mo;;
+        pot) xgettext --keyword="_" --files-from="po/POTFILES.in" -o po/lm.pot;;
+        mo)
+                cd po/;
+                mkdir -p /usr/share/locale/ru/LC_MESSAGES;
+                msgfmt ru.po -o /usr/share/locale/ru/LC_MESSAGES/lm.mo;;
         * | --help)
                 echo "\
 Usage:
@@ -27,7 +27,7 @@ Options:
         --help     this help
 
 Commands:
+        install    install this package
         pot        generate .pot file in po/
-        mo         compile and move .mo files from po/ to locale dirs
-If there are no commands, then build this package";;
+        mo         compile and move .mo files from po/ to locale dirs";;
 esac
