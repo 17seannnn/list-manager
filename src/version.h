@@ -15,8 +15,8 @@
 #define VERSION "1.18d"
 
 #define AUTHOR "Sergey Nikonov"
-#define AUTHOR_NICKNAME "17sean"
-#define AUTHOR_PAGE "https://github.com/17sean"
+#define AUTHOR_NICKNAME "17seannnn"
+#define AUTHOR_PAGE "https://github.com/17seannnn"
 
 void version_opt();
 
