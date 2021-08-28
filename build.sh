@@ -1,3 +1,5 @@
+#!/bin/sh
+
 CC=gcc
 
 case $1 in
