@@ -1,3 +1,5 @@
+/* lmstring.c */
+
 #include <stdio.h>
 
 #include "lmstring.h"

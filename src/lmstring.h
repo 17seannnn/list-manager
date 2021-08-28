@@ -1,3 +1,5 @@
+/* lmstring.h */
+
 #ifndef LMSTRING_H
 #define LMSTRING_H
 

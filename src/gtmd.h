@@ -1,3 +1,8 @@
+/*
+ * gtmd.h - gettext macro definitions
+ * Header for every module with strings
+ */
+
 #ifndef GTMD_H
 #define GTMD_H
 

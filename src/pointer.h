@@ -1,3 +1,5 @@
+/* pointer.h */
+
 #ifndef POINTER_H
 #define POINTER_H
 

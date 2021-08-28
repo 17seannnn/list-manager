@@ -1,3 +1,5 @@
+/* option.c */
+
 #include <stdio.h>
 #include "lmstring.h"
 #include "help.h"

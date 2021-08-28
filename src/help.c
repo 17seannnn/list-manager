@@ -1,3 +1,5 @@
+/* help.c */
+
 #include <stdio.h>
 #include "gtmd.h"
 #include "version.h"

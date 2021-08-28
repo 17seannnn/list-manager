@@ -1,3 +1,8 @@
+/*
+ * listmf.h - list macro functions
+ * Contain macro functions for any-linked lists
+ */
+
 #ifndef LISTMF_H
 #define LISTMF_H
 
