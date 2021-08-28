@@ -28,7 +28,7 @@ Commands:
 [Q/q] - quit
 
 Install
-./build.sh
+./build.sh install
 
 Translation
 ./build.sh pot     generate .pot file in po/, get files from po/POTFILES.in
