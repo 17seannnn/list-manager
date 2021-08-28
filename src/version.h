@@ -12,7 +12,7 @@
 #define LICENSE "MIT"
 #define LICENSE_PAGE "https://opensource.org/licenses/MIT"
 
-#define VERSION "1.18d"
+#define VERSION "2.00"
 
 #define AUTHOR "Sergey Nikonov"
 #define AUTHOR_NICKNAME "17seannnn"
